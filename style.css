@@ -1078,6 +1078,11 @@ body.dark .accreditation-card img {
 .site-footer {
   padding: 60px 10% 20px;
   font-size: 14px;
+  background:
+    radial-gradient(circle at top right, rgba(255,255,255,0.14), transparent 28%),
+    linear-gradient(180deg, #0b3f98 0%, #06285f 52%, #041a42 100%);
+  color: #eef4ff;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
 .footer-container {
@@ -1089,10 +1094,12 @@ body.dark .accreditation-card img {
 .footer-col h4 {
   margin-bottom: 15px;
   font-size: 16px;
+  color: #ffffff !important;
+  letter-spacing: 0.3px;
 }
 
 .footer-col p {
-  color: #cccccc;
+  color: #e2e8f0;
   line-height: 1.7;
 }
 
@@ -1109,19 +1116,22 @@ body.dark .accreditation-card img {
   max-width: 80px;
   margin-right: 10px;
   margin-top: 10px;
-  opacity: 0.8;
+  opacity: 1;
+  filter: none;
 }
 
 .footer-bottom {
   margin-top: 40px;
   text-align: center;
   padding-top: 15px;
-  border-top: 1px solid #ddd;
-  color: #9e9e9e;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  color: #dbe7ff;
 }
 
 body.dark .site-footer {
-  background: #0f0f0f;
+  background:
+    radial-gradient(circle at top right, rgba(96,165,250,0.12), transparent 30%),
+    linear-gradient(180deg, #111827 0%, #0b1220 100%);
 }
 
 body.dark .footer-col h4 {
@@ -1131,20 +1141,20 @@ body.dark .footer-col h4 {
 body.dark .footer-col p,
 body.dark .footer-links li,
 body.dark .footer-bottom {
-  color: #ccc;
+  color: #e5edf9;
 }
 
 body.dark .footer-bottom {
-  border-top: 1px solid #333;
+  border-top: 1px solid rgba(255,255,255,0.12);
 }
 
 body.dark .footer-logos img {
-  filter: brightness(0.85);
+  filter: none;
 }
 
 .footer-col a {
   display: inline-block;
-  color: #ffffff;
+  color: #f8fbff;
   text-decoration: none;
   line-height: 1.8;
   transition: color 0.3s ease;
@@ -1156,7 +1166,7 @@ body.dark .footer-logos img {
 }
 
 .footer-col a:hover {
-  color: #000;
+  color: #ffffff;
 }
 
 /* العناوين ثابتة */
@@ -1178,7 +1188,7 @@ body.dark .footer-logos img {
 .footer-col:hover ul,
 .footer-col:hover a,
 .footer-col:hover .footer-logos {
-  color: #000;
+  color: #ffffff;
   transform: translateY(-2px);
 }
 
@@ -1290,14 +1300,32 @@ body.dark .lang-btn:hover {
   display: flex;
   align-items: center;
   gap: 8px;
+  overflow: hidden;
   z-index: 9999;
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, padding 0.25s ease;
+}
+
+.whatsapp-btn::before {
+  content: "whatsup";
+  max-width: 0;
+  opacity: 0;
+  white-space: nowrap;
+  transform: translateX(-12px);
+  transition: max-width 0.3s ease, opacity 0.2s ease, transform 0.3s ease;
 }
 
 .whatsapp-btn:hover {
   transform: scale(1.1);
+  padding-left: 22px;
+  padding-right: 24px;
   box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+}
+
+.whatsapp-btn:hover::before {
+  max-width: 90px;
+  opacity: 1;
+  transform: translateX(0);
 }
 
 /* Dark Mode للزر */
@@ -2152,7 +2180,7 @@ body.dark .dot.active {
             padding-top: 30px;
             border-top: 2px solid var(--border-color);
             color: var(--text-color);
-            opacity: 0.8;
+            opacity: 1;
             font-size: 0.95rem;
         }
 
