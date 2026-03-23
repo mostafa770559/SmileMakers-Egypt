@@ -48,14 +48,37 @@ timelineData.forEach(item => {
 /* ===============================
    دارك مود (آمن بدون Errors)
 ================================ */
-const modeToggle = document.getElementById("modeToggle");
-const body = document.body;
 
-if (modeToggle) {
-    modeToggle.addEventListener("change", () => {
-        body.classList.toggle("dark-mode", modeToggle.checked);
+document.addEventListener("DOMContentLoaded", function () {
+
+    const darkToggle = document.getElementById("darkToggle");
+
+    // لو الزرار مش موجود ما نكملش
+    if (!darkToggle) return;
+
+    // تحميل الحالة المحفوظة
+    if (localStorage.getItem("darkMode") === "enabled") {
+        document.body.classList.add("dark");
+        darkToggle.textContent = "☀️ الوضع النهاري";
+    }
+
+    // عند الضغط على الزرار
+    darkToggle.addEventListener("click", function () {
+
+        document.body.classList.toggle("dark");
+
+        const isDark = document.body.classList.contains("dark");
+
+        // حفظ الحالة
+        localStorage.setItem("darkMode", isDark ? "enabled" : "disabled");
+
+        // تغيير نص الزرار
+        darkToggle.textContent = isDark
+            ? "☀️ الوضع النهاري"
+            : "🌙 الوضع الليلي";
     });
-}
+
+});
 
 /* ===============================
    تأثير الظهور عند التمرير
@@ -130,8 +153,11 @@ const infoEl = document.getElementById("storyInfo");
 const beforeImg = document.getElementById("beforeImg");
 const afterImg = document.getElementById("afterImg");
 const dots = document.getElementById("dots");
+const nextBtn = document.getElementById("next");
+const prevBtn = document.getElementById("prev");
 
 function renderStory(i) {
+  if (!textEl || !nameEl || !infoEl || !beforeImg || !afterImg) return;
   const s = stories[i];
   textEl.textContent = s.text;
   nameEl.textContent = s.name;
@@ -144,26 +170,36 @@ function renderStory(i) {
   });
 }
 
-stories.forEach((_, i) => {
-  const dot = document.createElement("span");
-  dot.onclick = () => {
-    current = i;
+
+if (dots) {
+  stories.forEach((_, i) => {
+    const dot = document.createElement("span");
+
+    dot.onclick = () => {
+      current = i;
+      renderStory(current);
+    };
+
+    dots.appendChild(dot);
+  });
+}
+if (nextBtn) {
+  nextBtn.onclick = () => {
+    current = (current + 1) % stories.length;
     renderStory(current);
   };
-  dots.appendChild(dot);
-});
+}
 
-document.getElementById("next").onclick = () => {
-  current = (current + 1) % stories.length;
+if (prevBtn) {
+  prevBtn.onclick = () => {
+    current = (current - 1 + stories.length) % stories.length;
+    renderStory(current);
+  };
+}
+
+if (textEl && nameEl && infoEl && beforeImg && afterImg) {
   renderStory(current);
-};
-
-document.getElementById("prev").onclick = () => {
-  current = (current - 1 + stories.length) % stories.length;
-  renderStory(current);
-};
-
-renderStory(current);
+}
 
 /* ===============================
    فتح وإغلاق الفورم
@@ -187,25 +223,36 @@ window.addEventListener("click", function (event) {
 /* ===============================
    FAQ
 ================================ */
-document.querySelectorAll(".faq-question").forEach(button => {
-    button.addEventListener("click", () => {
-        const answer = button.nextElementSibling;
-        document.querySelectorAll(".faq-answer").forEach(a => {
-            if (a !== answer) {
-                a.style.maxHeight = null;
-                a.previousElementSibling.classList.remove("active");
-            }
-        });
-        if (answer.style.maxHeight) {
-            answer.style.maxHeight = null;
-            button.classList.remove("active");
-        } else {
-            answer.style.maxHeight = answer.scrollHeight + "px";
-            button.classList.add("active");
-        }
-    });
-});
+document.addEventListener("click", function (e) {
 
+  const btn = e.target.closest(".faq-question");
+  if (!btn) return;
+
+  const item = btn.parentElement;
+  const answer = item.querySelector(".faq-answer");
+
+  // اقفل كل الباقي
+  document.querySelectorAll(".faq-item").forEach((i) => {
+    if (i !== item) {
+      i.classList.remove("active");
+      const question = i.querySelector(".faq-question");
+      if (question) question.classList.remove("active");
+      const ans = i.querySelector(".faq-answer");
+      if (ans) ans.style.maxHeight = null;
+    }
+  });
+
+  // toggle الحالي
+  item.classList.toggle("active");
+  btn.classList.toggle("active", item.classList.contains("active"));
+
+  if (item.classList.contains("active")) {
+    answer.style.maxHeight = answer.scrollHeight + "px";
+  } else {
+    answer.style.maxHeight = null;
+  }
+
+});
 /* ===============================
    تاريخ الميلاد وحساب العمر
 ================================ */
@@ -266,28 +313,33 @@ function sendWhatsApp() {
 /* ===============================
    العداد + الصوت
 ================================ */
-const counters = document.querySelectorAll(".counter");
-const dingSound = new Audio("ding-80828.mp3");
-let soundEnabled = false;
-let soundPlayed = false;
+document.addEventListener("DOMContentLoaded", function () {
+    const counters = document.querySelectorAll(".counter");
+    const dingSound = new Audio("ding-80828.mp3");
+    let soundEnabled = false;
+    let soundPlayed = false;
 
-function enableSoundOnScroll() {
-    dingSound.play().then(() => {
-        dingSound.pause();
-        dingSound.currentTime = 0;
-        soundEnabled = true;
-        console.log("🔊 الصوت اتفعل بالسكرول");
-    }).catch(() => {});
-    window.removeEventListener("scroll", enableSoundOnScroll);
-}
-window.addEventListener("scroll", enableSoundOnScroll, { once: true });
+    // تفعيل الصوت بعد أول تفاعل مع الصفحة
+    function enableSound() {
+        dingSound.play().then(() => {
+            dingSound.pause();
+            dingSound.currentTime = 0;
+            soundEnabled = true;
+        }).catch(() => {});
+        window.removeEventListener("scroll", enableSound);
+        window.removeEventListener("click", enableSound);
+    }
+    window.addEventListener("scroll", enableSound, { once: true });
+    window.addEventListener("click", enableSound, { once: true });
 
-const startCounters = () => {
     counters.forEach(counter => {
-        const target = +counter.dataset.target;
+        const target = parseInt(counter.dataset.target);
+        if (isNaN(target)) return;
+
         let count = 0;
         const speed = Math.max(target / 200, 1);
-        const update = () => {
+
+        function update() {
             count += speed;
             if (count < target) {
                 counter.innerText = Math.ceil(count);
@@ -300,18 +352,11 @@ const startCounters = () => {
                     soundPlayed = true;
                 }
             }
-        };
+        }
+
         update();
     });
-};
-
-const counterObserver = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting) {
-        startCounters();
-        counterObserver.disconnect();
-    }
 });
-document.querySelectorAll(".impact, .impact-section").forEach(sec => counterObserver.observe(sec));
 
 /* ===============================
    Dark Mode with localStorage
