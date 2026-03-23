@@ -1,6 +1,6 @@
 :root{
     --dark-blue:#012B73;
-    --light-blue:#6DA4DA;
+    --light-blue:#6da4da74;
     --mid-blue:#4D77BF;
     --red:#ED3626;
     --bg:#f4f7fb;
@@ -9,7 +9,56 @@
   color: #00aaff;
   font-weight: bold;
 }
+header{
+    position:relative;
+    min-height:450px;
+    padding:100px 20px;
+    text-align:center;
+    color:#fff;
+    overflow:hidden;
+}
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
 
+.faq-question {
+    cursor: pointer;
+    padding: 15px;
+    background: #eee;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+.faq-question.active {
+    background: #4D77BF;
+    color: white;
+}
+/* الصورة تملى الهيدر */
+.header-bg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;   /* أهم سطر */
+    object-position:center;
+    z-index:0;
+}
+/* طبقة تغميق */
+header::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.5);
+    z-index:1;
+}
+
+/* المحتوى فوق الصورة */
+header > *:not(.header-bg){
+    position:relative;
+    z-index:2;
+}
 .lang-btn:hover{
   transform: scale(1.05);
 }
@@ -89,7 +138,7 @@ body.dark header p {
 
 /* ===== Human Alert ===== */
 body.dark .human-alert {
-  background: #1e293b;
+  background: #1e293b72 ;
   color: #bfdbfe;
   border-right: 4px solid #60a5fa;
 }
@@ -132,11 +181,17 @@ body.dark .faq-question {
 
 body.dark .faq-answer {
   color: #cbd5f5;
+  background: linear-gradient(180deg, #152033 0%, #101827 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* Dark Mode */
 body.dark .faq-answer p {
   color: #fff;  /* النص أبيض في الدارك */
+}
+body.dark .faq-answer ul,
+body.dark .faq-answer li {
+  color: #e5ecff;
 }
 /* ===== Team Cards ===== */
 body.dark .team-card {
@@ -170,7 +225,7 @@ body.dark header{
   background:linear-gradient(135deg,#000,#222);
 }
 .human-alert{
-  background:var(--light-blue);
+  background:var(--light-blue) ;
   color:#fff;
   padding:14px;
   text-align:center;
@@ -410,13 +465,32 @@ ul{
 .faq-answer{
   max-height:0;
   overflow:hidden;
-  transition:max-height .4s ease;
+  transition:max-height .4s ease, padding .3s ease, background-color .3s ease;
   padding:0 20px;
+  background:linear-gradient(180deg, #f8fbff 0%, #eef5ff 100%);
+  border-top:1px solid rgba(1, 43, 115, .08);
 }
 
 .faq-answer p{
   margin:15px 0 20px;
-  color:#333;
+  color:#24324a;
+  line-height:1.9;
+  font-size:15px;
+}
+
+.faq-item.active .faq-answer{
+  padding:8px 20px 18px;
+}
+
+.faq-answer ul{
+  margin:15px 0 20px;
+  padding-right:18px;
+  color:#24324a;
+  line-height:1.9;
+}
+
+.faq-answer li{
+  margin-bottom:8px;
 }
 
 .impact-section {
@@ -448,7 +522,8 @@ ul{
   margin-bottom: 10px;
 }
 
-.counter {
+.counter,
+.impact-counter {
   font-size: 36px;
   font-weight: bold;
   color: var(--main-color);
@@ -1176,6 +1251,30 @@ body.dark .lang-btn:hover {
   background: #2a2a2a;
 }
 
+.faq-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 30px 0 15px;
+  color: #0d6efd;
+  position: relative;
+}
+
+.faq-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: #0d6efd;
+  margin: 8px auto 0;
+  border-radius: 5px;
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease, background-color 0.3s ease;
+}
 
 .whatsapp-btn {
   position: fixed;
