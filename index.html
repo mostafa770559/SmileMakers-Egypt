@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SmailMakers - Egypt</title>
+<title>SmileMakers - Egypt</title>
 <link rel="stylesheet" href="style.css">
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -18,7 +18,6 @@
   
 <button id="scrollTopBtn" title="الرجوع لأعلى"><i class="fa-solid fa-arrow-up"></i></button>
 
-<header>
 
 
   <div class="nav-actions">
@@ -31,17 +30,53 @@
     </button>
   </div>
 
-    <h1>معًا للتوعية بالشفة الأرنبية وشق سقف الحلق</h1>
-    <p>معلومة صحيحة… أمل حقيقي… ودعم مستمر</p>
-    <div class="human-alert">
-  💙 أنت مش لوحدك… الدعم موجود، والعلاج ممكن
-</div>
+<section class="hero">
+  <div class="hero-container">
 
-    <div class="btns">
-        <a href="#about" class="btn">اعرف أكتر</a>
-        <a href="https://whatsapp.com/channel/0029Va6qMIM17En264xdKq15" class="btn" target="_blank">تابعنا</a>
+    <!-- الصورة -->
+    <div class="hero-image">
+      <img src="teamphoto.jpeg" alt="رعاية طبية للأطفال">
+      <div class="badge">
+        <span>100%</span>
+        <small>خدمة مجانية</small>
+        <i class="fas fa-heart"></i>
+      </div>
     </div>
-</header>
+
+    <!-- المحتوى -->
+    <div class="hero-content">
+      <span class="hero-tag">💙 نرسم البسمة على وجوه أطفالنا</span>
+
+      <h1>
+        ابتسامة جديدة <br>
+        <span>لكل طفل محتاج</span>
+      </h1>
+
+      <p>
+        نقدم عمليات إصلاح الشفة الأرنبية وشق سقف الحلق
+        مجانًا         في جميع أنحاء مصر
+        بأيدي نخبة من أمهر الأطباء المتطوعين.
+      </p>
+
+      <div class="hero-actions">
+        <a href="javascript:void(0)"
+onclick="openForm()" class="btn primary">احجز موعدك الآن</a>
+        <a href="#team" class="btn outline">تعرف علينا</a>
+      </div>
+
+      <div class="hero-stats">
+        <div>
+          <strong>27</strong>
+          <span>محافظة</span>
+        </div>
+   
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
 
 
 
@@ -94,8 +129,6 @@
   <img src="mohmed-s3dah-removebg-preview.png" alt="د. محمد سعدة">
   <h3>دكتور/ محمد سعدة</h3>
   <span>استشارى جراحة الأطفال والمناظير
-رئيس قسم جراحة الأطفال
-مستشفى الأطفال التخصصى ببنها
 دكتوراة جراحة الأطفال
 وإصلاح التشوهات الخلقية - طب عين شمس
 الزمالة المصرية لجراحة الأطفال</span>
@@ -114,7 +147,9 @@
   <a href="">
   <img src="ibrahem-manswr-removebg-preview.png" alt="د. ابراهيم منصور">
   <h3>دكتور/ ابراهيم منصور</h3>
-  <span>استشاري طب أسنان الأطفال</span>
+  <span>استشاري طب أسنان الأطفال
+    زميل الجامعه الملكيه بادنبره لتقويم الاسنان
+  </span>
 </a>
 </div>
 
@@ -129,7 +164,7 @@
 <div class="team-card">
   <a href="">
   <img src="omar-kalal-removebg-preview.png" alt="د. عمرو جلال">
-  <h3>دكتور/ عمرو جلال</h3>
+  <h3>الاستاذ الدكتور/ عمرو جلال</h3>
   <span>استشاري الأنف والأذن والحنجرة بمعهد السمع والكلام</span>
 </a>
 </div>
@@ -137,7 +172,7 @@
 <div class="team-card">
   <a href="https://www.facebook.com/ElsherifENT?rdid=HhPT7TLVY6EECGyv&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1CD8dwQygR%2F#">
   <img src="hsam-shreaf-removebg-preview.png" alt="د. حسام الشريف">
-  <h3>دكتور/ حسام الشريف</h3>
+  <h3>الاستاذ الدكتور/ حسام الشريف</h3>
   <span>أستاذ الأنف والأذن والحنجرة - كلية الطب - جامعة طنطا</span>
 </a>
 </div>
@@ -147,7 +182,7 @@
 <div class="team-card">
   <a href="">
   <img src="ahmed-sa3ed.png" alt="الاستاذ الدكتور احمد سعيد ">
-  <h3>دكتور/  احمد سعيد</h3>
+  <h3>الاستاذ الدكتور/  احمد سعيد</h3>
   <span>استاذ التخدير والعناية المركزة - كلية الطب جامعة طنطا رئيس فريق التخدير</span>
 </a>
 </div>
@@ -174,51 +209,6 @@
 
 </section>
 
-<section class="hero">
-  <div class="hero-container">
-
-    <!-- الصورة -->
-    <div class="hero-image">
-      <img src="teamphoto.jpeg" alt="رعاية طبية للأطفال">
-      <div class="badge">
-        <span>100%</span>
-        <small>خدمة مجانية</small>
-        <i class="fas fa-heart"></i>
-      </div>
-    </div>
-
-    <!-- المحتوى -->
-    <div class="hero-content">
-      <span class="hero-tag">💙 نرسم البسمة على وجوه أطفالنا</span>
-
-      <h1>
-        ابتسامة جديدة <br>
-        <span>لكل طفل محتاج</span>
-      </h1>
-
-      <p>
-        نقدم عمليات إصلاح الشفة الأرنبية وشق سقف الحلق
-        مجانًا         في جميع أنحاء مصر
-        بأيدي نخبة من أمهر الأطباء المتطوعين.
-      </p>
-
-      <div class="hero-actions">
-        <a href="#" class="btn primary">احجز موعدك الآن</a>
-        <a href="#" class="btn outline">تعرف علينا</a>
-      </div>
-
-      <div class="hero-stats">
-        <div>
-          <strong>27</strong>
-          <span>محافظة</span>
-        </div>
-   
-      </div>
-    </div>
-
-  </div>
-</section>
-
 
 
 <section class="treatment-timeline">
@@ -238,7 +228,7 @@
 </section>
 
 <div class="video-box" > 
-
+ <h2>تعرف علي المزيد من خلال قناتنا على اليوتيوب</h2>
   <iframe 
     src="https://www.youtube.com/embed/R4QBVlueC3k?si=Y21GMtpuX_SIhhWw" 
     title="YouTube video player" 
@@ -251,149 +241,211 @@
 </div>
 
 
-
 <section class="faq text" id="faq">
   <h2 id="about" class="our-ser">الأسئلة الشائعة</h2>
-<div class="faq-item">
-  <button class="faq-question">
-    👶 هل تؤثر الشفة الأرنبية أو شق سقف الحلق على ذكاء الطفل؟
-    <span class="arrow">&#9660;</span>
-  </button>
-  <div class="faq-answer">
-    <p>لا، الحالة لا تؤثر على ذكاء الطفل أو قدراته العقلية.</p>
-  </div>
-</div>
 
-<div class="faq-item">
-  <button class="faq-question">
-    🧬 ما أسباب حدوث الشفة الأرنبية؟
-    <span class="arrow">&#9660;</span>
-  </button>
-  <div class="faq-answer">
-    <p>الأسباب قد تكون وراثية أو بيئية، وغالباً ليس هناك خطأ من الأم.</p>
-  </div>
-</div>
+  <!-- 🍼 عند الولادة -->
+  <div class="faq-title">🍼 عند الولادة</div>
 
-<div class="faq-item">
-  <button class="faq-question">
-    🕒 متى يتم التدخل الجراحي؟
-    <span class="arrow">&#9660;</span>
-  </button>
-  <div class="faq-answer">
-    <p>يختلف الوقت حسب الحالة، وغالباً يكون التدخل خلال الشهور الأولى من عمر الطفل.</p>
+  <div class="faq-item">
+    <button class="faq-question">
+      1) ما سبب حدوث الشفة الأرنبية أو شق سقف الحلق؟ <span class="arrow">&#9660;</span>
+    </button>
+    <div class="faq-answer">
+      <p>يحدث بسبب عدم اكتمال التحام أنسجة الوجه أثناء الحمل. قد يكون لعوامل وراثية أو بيئية دور، وغالبًا لا يكون بسبب خطأ من الأم.</p>
+    </div>
   </div>
-</div>
 
-<div class="faq-item">
-  <button class="faq-question">
-    🗣️ هل يحتاج الطفل إلى جلسات تخاطب؟
-    <span class="arrow">&#9660;</span>
-  </button>
-  <div class="faq-answer">
-    <p>نعم، خاصة إذا كان هناك شق في سقف الحلق.</p>
+  <div class="faq-item">
+    <button class="faq-question">
+      2) هل الحالة خطيرة؟ <span class="arrow">&#9660;</span>
+    </button>
+    <div class="faq-answer">
+      <p>ليست خطيرة على الحياة في معظم الحالات، لكنها تحتاج متابعة وعلاج مبكر.</p>
+    </div>
   </div>
-</div>
 
-<div class="faq-item">
-  <button class="faq-question">
-    ❤️ هل يمكن للطفل أن يعيش حياة طبيعية؟
-    <span class="arrow">&#9660;</span>
-  </button>
-  <div class="faq-answer">
-    <p>نعم، مع العلاج والدعم النفسي والمتابعة الطبية، يعيش الطفل حياة طبيعية تماماً.</p>
+  <div class="faq-item">
+    <button class="faq-question">
+      3) هل يمكن للطفل الرضاعة طبيعيًا؟ <span class="arrow">&#9660;</span>
+    </button>
+    <div class="faq-answer">
+      <p>قد يواجه صعوبة خاصة في شق سقف الحلق، لكن يمكن استخدام رضّاعات خاصة وتقنيات مساعدة.</p>
+    </div>
   </div>
-</div>
 
-<div class="faq-item">
-  <button class="faq-question">
-    🩺 ما هي الشقوق؟
-    <span class="arrow">&#9660;</span>
-  </button>
-  <div class="faq-answer">
-    <p>يولد طفل واحد من كل 700 طفل مصاب بشفة مشقوقة أو حنك مشقوق. تسبب هذه الشقوق صعوبات في الأكل والتنفس والسمع والكلام.</p>
+  <div class="faq-item">
+    <button class="faq-question">
+      4) هل سيحتاج الطفل لعدة عمليات؟ <span class="arrow">&#9660;</span>
+    </button>
+    <div class="faq-answer">
+      <p>نعم، غالبًا تكون خطة العلاج على مراحل تمتد حتى سن المراهقة.</p>
+    </div>
   </div>
-</div>
 
-<div class="faq-item">
-  <button class="faq-question">
-    🔹 ما هي الشفة الأرنبية؟
-    <span class="arrow">&#9660;</span>
-  </button>
-  <div class="faq-answer">
-    <p>تحدث عندما لا تلتحم أجزاء معينة أثناء نمو الجنين. قد يشمل الشق الشفة و/أو سقف الفم، بما فيه الحنك الصلب والرخو.</p>
-  </div>
-</div>
+  <!-- 👶 -->
+  <div class="faq-title">👶 من 3 إلى 12 شهرًا</div>
 
-<div class="faq-item">
-  <button class="faq-question">
-    🌍 ما مدى شيوع الشفة الأرنبية؟
-    <span class="arrow">&#9660;</span>
-  </button>
-  <div class="faq-answer">
-    <p>تختلف النسب حسب الأصل العرقي: أعلى نسبة بين الآسيويين (1 لكل 500 ولادة)، القوقازيون (1 لكل 700)، والأقل بين الأفارقة (1 لكل 1200).</p>
+  <div class="faq-item">
+    <button class="faq-question">
+      5) متى تُجرى عملية الشفة الأرنبية؟ <span class="arrow">&#9660;</span>
+    </button>
+    <div class="faq-answer">
+      <p>عادة بين عمر 3–6 أشهر حسب تقييم الجراح.</p>
+    </div>
   </div>
-</div>
 
-<div class="faq-item">
-  <button class="faq-question">
-    ⚠️ ما الذي يسبب الشفة الأرنبية؟
-    <span class="arrow">&#9660;</span>
-  </button>
-  <div class="faq-answer">
-    <p>تحدث بسبب عوامل وراثية وبيئية مثل التدخين، الكحول، بعض الأمراض، العدوى، أو نقص فيتامين ب (حمض الفوليك). في كثير من الحالات لا يمكن تحديد السبب بدقة.</p>
+  <div class="faq-item">
+    <button class="faq-question">
+      6) متى يُغلق شق سقف الحلق؟ <span class="arrow">&#9660;</span>
+    </button>
+    <div class="faq-answer">
+      <p>غالبًا بين 9–12 شهرًا لتحسين النطق وتقليل مشاكل الأذن.</p>
+    </div>
   </div>
-</div>
 
-<div class="faq-item">
-  <button class="faq-question">
-    ❌ ماذا يحدث إذا لم تُعالج الشفة الأرنبية؟
-    <span class="arrow">&#9660;</span>
-  </button>
-  <div class="faq-answer">
-    <p>الأطفال يواجهون صعوبات في الأكل والتنفس والسمع والكلام، لكن العلاج يخفف هذه الصعوبات ويساعدهم على النمو الطبيعي.</p>
+  <div class="faq-item">
+    <button class="faq-question">
+      7) هل العمليات خطيرة؟ <span class="arrow">&#9660;</span>
+    </button>
+    <div class="faq-answer">
+      <p>تُعد آمنة نسبيًا عند إجرائها في مراكز متخصصة.</p>
+    </div>
   </div>
-</div>
 
-<div class="faq-item">
-  <button class="faq-question">
-    ✅ هل يمكن علاج الشفة الأرنبية؟
-    <span class="arrow">&#9660;</span>
-  </button>
-  <div class="faq-answer">
-    <p>نعم، جراحة الترميم آمنة وفعالة. المرضى يرون ابتسامتهم لأول مرة وتتغير حياتهم للأفضل.</p>
+  <div class="faq-item">
+    <button class="faq-question">
+      8) هل سيبقى أثر للعملية؟ <span class="arrow">&#9660;</span>
+    </button>
+    <div class="faq-answer">
+      <p>يبقى أثر بسيط عادة، ويتحسن مع الوقت وقد تُجرى تعديلات لاحقًا.</p>
+    </div>
   </div>
-</div>
-<div class="faq-item">
-  <button class="faq-question">
-           المشاكل المرتبطة بالحالة
-<span class="arrow">&#9660;</span>
-  </button>
-  <div class="faq-answer">
-       <ul>
-            <li>صعوبات الرضاعة</li>
-            <li>مشاكل النطق</li>
-            <li>التهابات الأذن</li>
-            <li>تأثير نفسي على الطفل</li>
-            <li>نظرة المجتمع الخاطئة</li>
-        </ul>
 
+  <!-- 👂 -->
+  <div class="faq-title">👂 من سنة إلى 5 سنوات</div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      9) هل سيعاني الطفل من مشاكل سمع؟ <span class="arrow">&#9660;</span>
+    </button>
+    <div class="faq-answer">
+      <p>قد يحدث تجمع سوائل بالأذن الوسطى، وبعض الحالات تحتاج أنابيب تهوية.</p>
+    </div>
   </div>
-</div>
-<div class="faq-item">
-  <button class="faq-question">
-                    العلاج والدعم
-<span class="arrow">&#9660;</span>
-  </button>
-  <div class="faq-answer">
-   
-        <p>
-            ✔ جراحات تصحيحية  
-            <br>✔ جلسات تخاطب  
-            <br>✔ متابعة طبية مستمرة  
-            <br>✔ دعم نفسي وأسري  
-        </p>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      10) هل سيتأخر النطق؟ <span class="arrow">&#9660;</span>
+    </button>
+    <div class="faq-answer">
+      <p>قد يحدث تأخر، لذلك يُنصح بمتابعة أخصائي تخاطب مبكرًا.</p>
+    </div>
   </div>
-</div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      11) هل يحتاج الطفل جلسات تخاطب؟ <span class="arrow">&#9660;</span>
+    </button>
+    <div class="faq-answer">
+      <p>نعم، خاصة بعد إغلاق سقف الحلق.</p>
+    </div>
+  </div>
+
+  <!-- 🦷 -->
+  <div class="faq-title">🦷 من 6 إلى 12 سنة</div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      12) هل ستتأثر الأسنان؟ <span class="arrow">&#9660;</span>
+    </button>
+    <div class="faq-answer">
+      <p>نعم، قد يحدث تزاحم أو غياب بعض الأسنان.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      13) هل يحتاج الطفل تقويم أسنان؟ <span class="arrow">&#9660;</span>
+    </button>
+    <div class="faq-answer">
+      <p>غالبًا نعم، ويبدأ عادة بين 8–12 سنة.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      14) ما هو الترقيع العظمي؟ <span class="arrow">&#9660;</span>
+    </button>
+    <div class="faq-answer">
+      <p>إجراء لسد الشق في اللثة ودعم الأسنان الدائمة.</p>
+    </div>
+  </div>
+
+  <!-- 👦 -->
+  <div class="faq-title">👦 مرحلة المراهقة</div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      15) هل سيحتاج لجراحة للفك؟ <span class="arrow">&#9660;</span>
+    </button>
+    <div class="faq-answer">
+      <p>بعض الحالات تحتاج جراحة تصحيح الفك بعد اكتمال النمو.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      16) هل يمكن تحسين شكل الأنف أو الشفة لاحقًا؟ <span class="arrow">&#9660;</span>
+    </button>
+    <div class="faq-answer">
+      <p>نعم، يمكن إجراء جراحات تجميلية نهائية.</p>
+    </div>
+  </div>
+
+  <!-- 💬 -->
+  <div class="faq-title">💬 أسئلة عامة</div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      17) هل يؤثر الشق على الذكاء؟ <span class="arrow">&#9660;</span>
+    </button>
+    <div class="faq-answer">
+      <p>لا، لا علاقة له بمستوى الذكاء.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      18) هل يمكن أن تتكرر الحالة؟ <span class="arrow">&#9660;</span>
+    </button>
+    <div class="faq-answer">
+      <p>الاحتمال موجود لكنه منخفض، ويمكن استشارة طبيب وراثة.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      19) هل يمكن أن يعيش الطفل حياة طبيعية؟ <span class="arrow">&#9660;</span>
+    </button>
+    <div class="faq-answer">
+      <p>نعم، مع العلاج والمتابعة يعيش حياة طبيعية تمامًا.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      20) ما أهم عوامل نجاح العلاج؟ <span class="arrow">&#9660;</span>
+    </button>
+    <div class="faq-answer">
+      <ul>
+        <li>الالتزام بالمواعيد</li>
+        <li>المتابعة مع فريق طبي متخصص</li>
+        <li>الدعم النفسي من الأسرة</li>
+      </ul>
+    </div>
+  </div>
+<div id="dots" class="dots"></div>
 
 
      <!-- زر واتساب ثابت -->
@@ -412,16 +464,14 @@
   </div>
 
 
-<section class="impact">
   <div class="impact-box">
     <span class="impact-icon"><i class="fa-solid fa-stethoscope"></i></span>
-    <h3 class="counter" data-target="13500">98</h3>
+    <h3 class="counter" data-target="13500">0</h3>
     <p>فحص طبي <br><br><br></p>
   </div>
   
-</section>
  <div class="impact-box">
-    <span class="impact-icon"><i class="fa-solid fa-user-doctor"></i>
+    <span class="impact-icon"><i class="fa-solid fa-user-doctor"></i></span>
     <h3 class="counter" data-target="3500">0</h3>
     <p style="font-size: 16px;">اجراء طبي + عمليات</p>
   </div>
@@ -562,6 +612,7 @@
 </footer>
 
 <script src="script.js"></script>
+<script src="fixes.js"></script>
 
 
 </body>
