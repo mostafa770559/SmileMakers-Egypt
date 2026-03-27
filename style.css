@@ -691,7 +691,8 @@ ul{
   align-items:center;
 }
 
-.faq-question.active{
+.faq-question.active,
+.faq-item.active .faq-question{
   background:#6DA4DA;
   color:#fff;
 }
@@ -700,7 +701,8 @@ ul{
   transition:.3s;
 }
 
-.faq-question.active .arrow{
+.faq-question.active .arrow,
+.faq-item.active .faq-question .arrow{
   transform:rotate(180deg);
 }
 
@@ -771,6 +773,7 @@ ul{
 }
 
 .faq-item.active .faq-answer{
+  max-height: 1600px;
   padding:8px 20px 18px;
 }
 
@@ -1664,11 +1667,17 @@ body.dark .footer-col:hover a {
    language label doesn't nudge it. Use logical inset for RTL/LTR support. */
 .navbar .theme-switch {
   position: absolute;
-  inset-inline-start: calc(8% + 56px); /* move slightly inward to avoid colliding with lang button */
+  left: calc(8% + 56px); /* keep fixed position regardless of page dir */
+  inset-inline-start: auto;
   top: 50%;
   transform: translateY(-50%);
   z-index: 1100;
   order: 0; /* prevent flex reordering side-effects */
+}
+
+.navbar .theme-switch__container {
+  transform: scale(0.92);
+  transform-origin: center;
 }
 
 /* Language button: default (LTR) anchored to the right; when RTL (Arabic), anchor to the left */
@@ -1678,12 +1687,14 @@ body.dark .footer-col:hover a {
   transform: translateY(-50%);
   z-index: 1100;
   right: 8%;
+  height: 34px;
+  padding: 6px 10px;
+  font-size: 13px;
+  gap: 6px;
+  line-height: 1;
 }
 
-html[dir="rtl"] .navbar #langToggle{
-  right: auto;
-  left: 8%;
-}
+html[dir="rtl"] .navbar #langToggle{ right: 8%; left: auto; }
 
 /* Prevent the language button text from wrapping or resizing when toggled */
 #langToggle{
@@ -1697,7 +1708,7 @@ html[dir="rtl"] .navbar #langToggle{
 @media (max-width: 420px){
   /* on very small screens, keep the button compact and avoid wrap/shift */
   #langToggle{ padding: 6px 8px; font-size: 13px; min-width: 72px }
-  .navbar .theme-switch{ inset-inline-start: calc(8% + 44px) }
+  .navbar .theme-switch{ left: calc(8% + 44px); inset-inline-start: auto; }
 }
 
 .nav-logo {
@@ -1759,6 +1770,13 @@ body.dark .navbar.scrolled{
   align-items: center;
 }
 
+/* keep nav order stable even when html dir toggles with language */
+.navbar,
+.navbar .nav-center,
+.navbar .nav-links{
+  direction: rtl;
+}
+
 .nav-link{
   text-decoration: none;
   color: var(--dark-blue);
@@ -1785,20 +1803,126 @@ body.dark .navbar.scrolled{
 /* Mobile hamburger */
 .nav-toggle{
   display:none;
-  background:transparent;
-  border:none;
-  font-size:20px;
-  padding:8px;
+  background: transparent;
+  border: 1px solid rgba(77,119,191,0.22);
+  border-radius: 10px;
+  padding: 8px;
   cursor:pointer;
-  color:var(--dark-blue);
+  color: var(--mid-blue);
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+}
+
+/* Custom hamburger icon (3 bars -> X) */
+.nav-toggle .icon-menu {
+  --gap: 5px;
+  --height-bar: 2.5px;
+  --pos-y-bar-one: 0;
+  --pos-y-bar-three: 0;
+  --scale-bar: 1;
+  --rotate-bar-one: 0;
+  --rotate-bar-three: 0;
+  width: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.nav-toggle .bar {
+  position: relative;
+  height: var(--height-bar);
+  width: 100%;
+  border-radius: 999px;
+  background-color: currentColor;
+}
+
+.nav-toggle .bar--1 {
+  top: var(--pos-y-bar-one);
+  transform: rotate(var(--rotate-bar-one));
+  transition: top 200ms 100ms, transform 100ms;
+}
+
+.nav-toggle .bar--2 {
+  transform: scaleX(var(--scale-bar));
+  transition: transform 150ms 100ms;
+}
+
+.nav-toggle .bar--3 {
+  bottom: var(--pos-y-bar-three);
+  transform: rotate(var(--rotate-bar-three));
+  transition: bottom 200ms 100ms, transform 100ms;
+}
+
+.nav-toggle.is-open .bar--1 {
+  transition: top 200ms, transform 200ms 100ms;
+}
+
+.nav-toggle.is-open .bar--3 {
+  transition: bottom 200ms, transform 200ms 100ms;
+}
+
+.nav-toggle.is-open .icon-menu {
+  --pos-y-bar-one: calc(var(--gap) + var(--height-bar));
+  --pos-y-bar-three: calc(var(--gap) + var(--height-bar));
+  --scale-bar: 0;
+  --rotate-bar-one: 45deg;
+  --rotate-bar-three: -45deg;
+}
+
+.nav-toggle:hover {
+  background: rgba(77,119,191,0.08);
+  border-color: rgba(77,119,191,0.35);
+}
+
+body.dark .nav-toggle {
+  color: #bcd2ff;
+  border-color: rgba(188,210,255,0.28);
+}
+
+body.dark .nav-toggle:hover {
+  background: rgba(188,210,255,0.1);
 }
 
 @media (max-width: 600px){
-  .nav-toggle{display:block}
-  .navbar{padding:14px 4%}
+  .nav-toggle{display:inline-flex}
+  .navbar{
+    padding:12px 4%;
+    min-height:64px;
+    direction:ltr;
+    gap:10px;
+    align-items:center;
+  }
+  .navbar .theme-switch{
+    position:static;
+    left:auto;
+    inset-inline-start:auto;
+    top:auto;
+    transform:none;
+    order:1;
+    margin:0;
+  }
+  .navbar #langToggle{
+    position:static;
+    top:auto;
+    right:auto;
+    left:auto;
+    transform:none;
+    order:3;
+    margin:0;
+    height:32px;
+  }
+  .navbar #langToggle:hover{
+    transform:none;
+  }
+  .navbar .nav-toggle{
+    order:2;
+    margin:0 auto;
+  }
   .navbar .nav-actions{gap:8px}
   /* when menu open show center */
-  .navbar.nav-open .nav-center{display:flex; position:absolute; inset:72px 8% auto 8%; background:var(--card-bg); border-radius:12px; box-shadow:0 12px 30px rgba(0,0,0,0.12); padding:12px; flex-direction:column}
+  .navbar.nav-open .nav-center{display:flex; position:absolute; inset:72px 8% auto 8%; background:var(--card-bg); border-radius:12px; box-shadow:0 12px 30px rgba(0,0,0,0.12); padding:12px; flex-direction:column; direction:rtl}
   .navbar.nav-open .nav-center .nav-links{flex-direction:column; gap:8px}
 }
 
@@ -1876,6 +2000,19 @@ body.dark .lang-btn:hover {
   box-shadow: 0 20px 45px rgba(77,119,191,0.12);
 }
 
+/* keep navbar language button aligned (it is absolutely positioned in the navbar) */
+.navbar #langToggle:hover {
+  transform: translateY(-50%);
+  box-shadow: 0 12px 28px rgba(77,119,191,0.12);
+}
+
+@media (max-width: 600px){
+  .navbar #langToggle:hover{
+    transform:none !important;
+    box-shadow: 0 10px 24px rgba(77,119,191,0.10);
+  }
+}
+
 /* pressed / dark state */
 #darkToggle[aria-pressed="true"] {
   background: linear-gradient(90deg, #0f3f8f 0%, #2b6cff 100%);
@@ -1912,7 +2049,7 @@ body.dark #langToggle {
 
 /* small screens: slightly smaller buttons */
 @media (max-width: 600px){
-  #darkToggle, #langToggle { padding: 8px 10px; font-size:13px }
+  #darkToggle, #langToggle { padding: 6px 8px; font-size:12px }
 }
 
 .faq-title {
@@ -2972,8 +3109,8 @@ body.dark .form-wrapper {
 .dark .success-stories img {
   filter: brightness(0.9) contrast(1.05);
 }
-#darkToggle,
-#langToggle {
+.legacy-fixed-toggles #darkToggle,
+.legacy-fixed-toggles #langToggle {
   position: fixed;
   top: 10px; /* تحت النافبار */
   z-index: 9999;
@@ -2984,12 +3121,12 @@ body.dark .form-wrapper {
 }
 
 /* الشمال */
-#darkToggle {
+.legacy-fixed-toggles #darkToggle {
   left: 15px;
 }
 
 /* اليمين */
-#langToggle {
+.legacy-fixed-toggles #langToggle {
   right: 15px;
 }
 
