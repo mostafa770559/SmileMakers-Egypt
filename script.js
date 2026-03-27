@@ -1,814 +1,448 @@
-/* ===============================
-   بيانات المخطط الزمني
-================================ */
-const timelineData = [
-    { label: "قبل الولادة", type: "special", desc: "التقييم الأولي والتخطيط للعلاج" },
-    { label: "الولادة إلى 3 أشهر", type: "special", desc: "تقييم شامل للحالة بعد الولادة مباشرة، مع تدريب الأهل على طرق الرضاعة الخاصة، ومتابعة الوزن والتغذية، وأحيانًا استخدام جهاز تقويمي مبكر لتقريب جانبي الشفة أو اللثة قبل الجراحة." },
-    { label: "3–6", title: "عمر 3–6 أشهر", type: "month", desc: "إجراء عملية إصلاح الشفة الأرنبية غالبًا عند عمر 3 أشهر تقريبًا، بهدف إغلاق الشفة وتحسين الشكل والوظيفة.", year: "عملية إصلاح الشفة الأرنبية" },
-    { label: "9–12", title: "عمر 9–12 شهرًا", type: "month", desc: "إجراء عملية إصلاح شق سقف الحلق لتحسين النطق مستقبلًا، والمساعدة على البلع والتغذية، وتقليل التهابات الأذن.", year: "عملية إصلاح شق سقف الحلق" },
-    { label: "1 – 5", title: "من سنة إلى 5 سنوات", type: "year", desc: "متابعة السمع، وقد يحتاج بعض الأطفال إلى أنابيب تهوية بالأذن بسبب تجمع السوائل، مع بدء جلسات التخاطب عند الحاجة ومتابعة نمو الأسنان والفك.", year: "متابعة السمع والتخاطب" },
-    { label: "6 – 9", title: "عمر 6–9 سنوات", type: "year", desc: "ترقيع عظمي للثة عند وجود شق باللثة، باستخدام عظم يؤخذ غالبًا من الحوض للمساعدة على تثبيت الأسنان الدائمة ودعم الأنف والفك.", year: "ترقيع عظمي للثة" },
-    { label: "8 – 12", title: "عمر 8–12 سنة", type: "year", desc: "تقويم أسنان مبكر لتصحيح الاصطفاف، مع تقييم الحاجة إلى جراحات تجميلية بسيطة لتحسين شكل الأنف أو الشفة.", year: "مرحلة التقويم والتحسين التجميلي" },
-    { label: "15 – 18", title: "عمر 15–18 سنة", type: "year", desc: "في بعض الحالات قد يتم اللجوء إلى جراحة تصحيح الفك إذا وُجد خلل في نمو الفك العلوي، أو إجراء عمليات تجميل نهائية للشفة أو الأنف.", year: "مرحلة المراهقة" }
-];
+(() => {
+  const $ = (s, root = document) => root.querySelector(s);
+  const $$ = (s, root = document) => Array.from(root.querySelectorAll(s));
 
-/* ===============================
-   إنشاء المخطط الزمني
-================================ */
-const timelineContainer = document.getElementById("monthlyTimeline");
+  const timelineData = [
+    {
+      ar: { label: 'قبل الولادة', type: 'special', desc: 'التقييم الأولي والتخطيط للعلاج.' },
+      en: { label: 'Before Birth', type: 'special', desc: 'Initial assessment and treatment planning.' }
+    },
+    {
+      ar: { label: 'الولادة إلى 3 أشهر', type: 'special', desc: 'متابعة التغذية والنمو وتجهيز خطة العلاج.' },
+      en: { label: 'Birth to 3 Months', type: 'special', desc: 'Follow-up for feeding and growth, and treatment plan preparation.' }
+    },
+    {
+      ar: { label: '3-6', title: 'عمر 3-6 أشهر', type: 'month', desc: 'عملية إصلاح الشفة الأرنبية.', year: 'إصلاح الشفة الأرنبية' },
+      en: { label: '3-6', title: 'Age 3-6 Months', type: 'month', desc: 'Cleft lip repair surgery.', year: 'Cleft Lip Repair' }
+    },
+    {
+      ar: { label: '9-12', title: 'عمر 9-12 شهرًا', type: 'month', desc: 'عملية إصلاح شق سقف الحلق.', year: 'إصلاح سقف الحلق' },
+      en: { label: '9-12', title: 'Age 9-12 Months', type: 'month', desc: 'Cleft palate repair surgery.', year: 'Cleft Palate Repair' }
+    },
+    {
+      ar: { label: '1-5', title: 'من سنة إلى 5 سنوات', type: 'year', desc: 'متابعة السمع والتخاطب ونمو الأسنان.' },
+      en: { label: '1-5', title: 'From 1 to 5 Years', type: 'year', desc: 'Follow-up for hearing, speech, and dental growth.' }
+    },
+    {
+      ar: { label: '6-12', title: 'من 6 إلى 12 سنة', type: 'year', desc: 'متابعة الأسنان والتقويم والترقيع العظمي عند الحاجة.' },
+      en: { label: '6-12', title: 'From 6 to 12 Years', type: 'year', desc: 'Dental and orthodontic follow-up, and bone grafting when needed.' }
+    },
+    {
+      ar: { label: '15-18', title: 'مرحلة المراهقة', type: 'year', desc: 'تقييم جراحات التجميل أو تصحيح الفك عند الحاجة.' },
+      en: { label: '15-18', title: 'Adolescence', type: 'year', desc: 'Assessment for cosmetic or jaw correction surgeries when needed.' }
+    }
+  ];
 
-timelineData.forEach(item => {
-    let titleText = item.title || (
-        item.type === "month" ? `شهر ${item.label}` :
-        item.type === "year" ? `${item.label} سنوات` :
-        item.label
-    );
+  function renderTimeline(lang = 'ar') {
+    const container = $('#monthlyTimeline');
+    if (!container) return;
+    container.innerHTML = '';
 
-    const timelineItem = document.createElement("div");
-    timelineItem.className = "timeline-item";
-
-    timelineItem.innerHTML = `
+    timelineData.forEach((entry) => {
+      const item = entry[lang] || entry.ar;
+      const title = item.title || (item.type === 'month' ? (lang === 'en' ? `Month ${item.label}` : `شهر ${item.label}`) : item.label);
+      const el = document.createElement('div');
+      el.className = 'timeline-item';
+      el.innerHTML = `
         <div class="timeline-dot"></div>
         <div class="timeline-content">
-            <div class="timeline-time">
-                <div class="timeline-month">${titleText}</div>
-                ${item.year ? `<div class="timeline-year">${item.year}</div>` : ""}
-            </div>
-            <div class="timeline-desc">${item.desc}</div>
-        </div>
-    `;
-
-    timelineContainer.appendChild(timelineItem);
-});
-
-/* ===============================
-   دارك مود (آمن بدون Errors)
-================================ */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const darkToggle = document.getElementById("darkToggle");
-
-    // لو الزرار مش موجود ما نكملش
-    if (!darkToggle) return;
-
-    // تحميل الحالة المحفوظة
-    if (localStorage.getItem("darkMode") === "enabled") {
-        document.body.classList.add("dark");
-        darkToggle.textContent = "☀️ الوضع النهاري";
-    }
-
-    // عند الضغط على الزرار
-    darkToggle.addEventListener("click", function () {
-
-        document.body.classList.toggle("dark");
-
-        const isDark = document.body.classList.contains("dark");
-
-        // حفظ الحالة
-        localStorage.setItem("darkMode", isDark ? "enabled" : "disabled");
-
-        // تغيير نص الزرار
-        darkToggle.textContent = isDark
-            ? "☀️ الوضع النهاري"
-            : "🌙 الوضع الليلي";
-        // expose state for CSS
-        darkToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+          <div class="timeline-time">
+            <div class="timeline-month">${title}</div>
+            ${item.year ? `<div class="timeline-year">${item.year}</div>` : ''}
+          </div>
+          <div class="timeline-desc">${item.desc}</div>
+        </div>`;
+      container.appendChild(el);
     });
-
-});
-
-/* ===============================
-   تأثير الظهور عند التمرير
-================================ */
-const timelineObserver = new IntersectionObserver(
-    entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = "1";
-                entry.target.style.transform = "translateY(0)";
-            }
-        });
-    },
-    { threshold: 0.1 }
-);
-
-document.querySelectorAll(".timeline-item").forEach(item => {
-    item.style.opacity = "0";
-    item.style.transform = "translateY(25px)";
-    item.style.transition = "0.6s ease";
-    timelineObserver.observe(item);
-});
-
-/* ===============================
-   زر الرجوع لأعلى
-================================ */
-window.onscroll = function () {
-    const btn = document.getElementById("scrollTopBtn");
-    if (document.documentElement.scrollTop > 300) {
-        btn.style.display = "block";
-    } else {
-        btn.style.display = "none";
-    }
-};
-
-document.getElementById("scrollTopBtn").onclick = function () {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-};
-
-// navbar shadow on scroll
-document.addEventListener("DOMContentLoaded", function () {
-    const nav = document.querySelector('.navbar');
-    if (!nav) return;
-
-    function updateNavShadow() {
-        if (window.scrollY > 8) nav.classList.add('scrolled');
-        else nav.classList.remove('scrolled');
-    }
-
-    updateNavShadow();
-    window.addEventListener('scroll', updateNavShadow, { passive: true });
-});
-
-/* ===============================
-   القصص (Stories)
-================================ */
-                /* =====================
-                   Generic scroll-triggered animations
-                   Elements: add class `animate-on-scroll` and optional `style="--delay:.12s"`
-                   ===================== */
-                document.addEventListener('DOMContentLoaded', () => {
-                    const animated = document.querySelectorAll('.animate-on-scroll');
-                    if (!animated || animated.length === 0) return;
-
-                    const io = new IntersectionObserver((entries, obs) => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                const el = entry.target;
-                                // set delay from data-delay or CSS var
-                                const delay = el.dataset && el.dataset.delay ? el.dataset.delay : null;
-                                if (delay) el.style.setProperty('--delay', delay);
-                                el.classList.add('in-view');
-                                obs.unobserve(el);
-                            }
-                        });
-                    }, { threshold: 0.12 });
-
-                    animated.forEach((el, i) => {
-                        // if no explicit delay, stagger slightly by index
-                        if (!el.style.getPropertyValue('--delay')) {
-                            const stagger = (i % 6) * 0.06; // up to ~0.36s
-                            el.style.setProperty('--delay', `${stagger}s`);
-                        }
-                        io.observe(el);
-                    });
-                });
-const stories = [
-  {
-    text: "كانت رحلة يوسف صعبة في البداية، لكن بفضل الله ثم الفريق الطبي أصبح يبتسم بثقة.",
-    name: "يوسف أحمد",
-    info: "4 سنوات – الغربيه",
-    before: "img/before.jpg",
-    after: "img/after.jpg"
-  },
-  {
-    text: "ابنتي استعادت ثقتها بنفسها بعد العملية، والفرق كان لا يُصدق.",
-    name: "مريم خالد",
-    info: "6 سنوات – الصعيد",
-    before: "img/before2.jpg",
-    after: "img/after2.jpg"
-  },
-  {
-    text: "الابتسامة رجعت لحياة طفلنا من جديد، شكرًا لكل من ساهم.",
-    name: "آدم محمد",
-    info: "5 سنوات – الإسكندرية",
-    before: "img/before3.jpg",
-    after: "img/after3.jpg"
   }
-];
 
-let current = 0;
+  function setupTheme() {
+    const checkbox = $('#themeSwitchCheckbox');
+    if (!checkbox) return;
 
-const textEl = document.getElementById("storyText");
-const nameEl = document.getElementById("storyName");
-const infoEl = document.getElementById("storyInfo");
-const beforeImg = document.getElementById("beforeImg");
-const afterImg = document.getElementById("afterImg");
-const dots = document.getElementById("dots");
-const nextBtn = document.getElementById("next");
-const prevBtn = document.getElementById("prev");
-
-function renderStory(i) {
-  if (!textEl || !nameEl || !infoEl || !beforeImg || !afterImg) return;
-  const s = stories[i];
-  textEl.textContent = s.text;
-  nameEl.textContent = s.name;
-  infoEl.textContent = s.info;
-  beforeImg.src = s.before;
-  afterImg.src = s.after;
-
-  document.querySelectorAll(".dots span").forEach((d, index) => {
-    d.classList.toggle("active", index === i);
-  });
-}
-
-
-if (dots) {
-  stories.forEach((_, i) => {
-    const dot = document.createElement("span");
-
-    dot.onclick = () => {
-      current = i;
-      renderStory(current);
+    const applyTheme = (enabled) => {
+      document.body.classList.toggle('dark', enabled);
+      localStorage.setItem('darkMode', enabled ? 'enabled' : 'disabled');
+      checkbox.checked = enabled;
     };
 
-    dots.appendChild(dot);
-  });
-}
-if (nextBtn) {
-  nextBtn.onclick = () => {
-    current = (current + 1) % stories.length;
-    renderStory(current);
-  };
-}
-
-if (prevBtn) {
-  prevBtn.onclick = () => {
-    current = (current - 1 + stories.length) % stories.length;
-    renderStory(current);
-  };
-}
-
-if (textEl && nameEl && infoEl && beforeImg && afterImg) {
-  renderStory(current);
-}
-
-/* ===============================
-   فتح وإغلاق الفورم
-================================ */
-function openForm(e) {
-    if (e) e.preventDefault();
-    document.getElementById("waModal").style.display = "flex";
-    document.body.style.overflow = "hidden";
-}
-
-function closeForm() {
-    document.getElementById("waModal").style.display = "none";
-    document.body.style.overflow = "auto";
-}
-
-window.addEventListener("click", function (event) {
-    const modal = document.getElementById("waModal");
-    if (event.target === modal) closeForm();
-});
-
-/* ===============================
-   FAQ
-================================ */
-document.addEventListener("click", function (e) {
-
-  const btn = e.target.closest(".faq-question");
-  if (!btn) return;
-
-  const item = btn.parentElement;
-  const answer = item.querySelector(".faq-answer");
-
-  // اقفل كل الباقي
-  document.querySelectorAll(".faq-item").forEach((i) => {
-    if (i !== item) {
-      i.classList.remove("active");
-      const question = i.querySelector(".faq-question");
-      if (question) question.classList.remove("active");
-      const ans = i.querySelector(".faq-answer");
-      if (ans) ans.style.maxHeight = null;
-    }
-  });
-
-  // toggle الحالي
-  item.classList.toggle("active");
-  btn.classList.toggle("active", item.classList.contains("active"));
-
-  if (item.classList.contains("active")) {
-    answer.style.maxHeight = answer.scrollHeight + "px";
-  } else {
-    answer.style.maxHeight = null;
+    applyTheme(localStorage.getItem('darkMode') === 'enabled');
+    checkbox.addEventListener('change', () => applyTheme(checkbox.checked));
   }
 
-});
-/* ===============================
-   تاريخ الميلاد وحساب العمر
-================================ */
-const birthDate = document.getElementById("birthDate");
-const todayDate = new Date().toISOString().split("T")[0];
-if (birthDate) birthDate.max = todayDate;
+  function setupScrollTop() {
+    const btn = $('#scrollTopBtn');
+    if (!btn) return;
 
-function calculateExactAge(birth) {
-    const b = new Date(birth);
-    const t = new Date();
+    const update = () => {
+      btn.style.display = window.scrollY > 300 ? 'block' : 'none';
+    };
 
-    let years = t.getFullYear() - b.getFullYear();
-    let months = t.getMonth() - b.getMonth();
-    let days = t.getDate() - b.getDate();
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  }
+
+  function setupNavbar() {
+    const nav = $('.navbar');
+    const navToggle = $('#navToggle');
+    const primaryNav = $('#primaryNav');
+    if (!nav || !navToggle || !primaryNav) return;
+
+    const setIconOpen = (open) => {
+      navToggle.classList.toggle('is-open', open);
+      const icon = navToggle.querySelector('i');
+      if (icon) {
+        icon.classList.toggle('fa-bars', !open);
+        icon.classList.toggle('fa-xmark', open);
+      }
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      navToggle.setAttribute('aria-label', open ? 'إغلاق القائمة' : 'قائمة التنقل');
+    };
+
+    const setOpen = (open) => {
+      nav.classList.toggle('nav-open', open);
+      setIconOpen(open);
+    };
+
+    navToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setOpen(!nav.classList.contains('nav-open'));
+    });
+
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth > 600) return;
+      if (!nav.classList.contains('nav-open')) return;
+      if (nav.contains(e.target)) return;
+      setOpen(false);
+    });
+
+    $$('#primaryNav .nav-link').forEach((a) => {
+      a.addEventListener('click', () => {
+        if (window.innerWidth <= 600) setOpen(false);
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && nav.classList.contains('nav-open')) setOpen(false);
+    });
+
+    const onScroll = () => {
+      nav.classList.toggle('scrolled', window.scrollY > 8);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  function setupFaq() {
+    $$('.faq-question').forEach((btn) => {
+      btn.setAttribute('tabindex', '0');
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        if (!item) return;
+        const isOpen = item.classList.contains('active');
+        $$('.faq-item.active').forEach((el) => el.classList.remove('active'));
+        if (!isOpen) item.classList.add('active');
+      });
+      btn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          btn.click();
+        }
+      });
+    });
+  }
+
+  function setupLanguage() {
+    const langToggle = $('#langToggle');
+    const translations = window.siteTranslations || {};
+    if (!langToggle || !translations.ar || !translations.en) return;
+
+    const setText = (sel, text) => {
+      const el = $(sel);
+      if (el && typeof text === 'string') el.textContent = text;
+    };
+
+    const textNodeOriginal = new WeakMap();
+    const attrOriginal = new WeakMap();
+
+    const normalizeKey = (v) => (v || '')
+      .replace(/\u00A0/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    const applyPhraseMap = (lang) => {
+      const map = translations.phraseMap || {};
+      const normalizedMap = {};
+      Object.keys(map).forEach((k) => {
+        normalizedMap[normalizeKey(k)] = map[k];
+      });
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      let node = walker.nextNode();
+      while (node) {
+        const parentTag = node.parentElement ? node.parentElement.tagName : '';
+        if (!['SCRIPT', 'STYLE', 'NOSCRIPT'].includes(parentTag)) {
+          if (!textNodeOriginal.has(node)) textNodeOriginal.set(node, node.nodeValue);
+          const original = textNodeOriginal.get(node) || '';
+          if (lang === 'ar') {
+            node.nodeValue = original;
+          } else {
+            const trimmed = original.trim();
+            const mapped = normalizedMap[normalizeKey(trimmed)];
+            if (trimmed && mapped) node.nodeValue = original.replace(trimmed, mapped);
+          }
+        }
+        node = walker.nextNode();
+      }
+
+      const attrTargets = document.querySelectorAll('[title],[alt],[placeholder]');
+      attrTargets.forEach((el) => {
+        ['title', 'alt', 'placeholder'].forEach((attr) => {
+          if (!el.hasAttribute(attr)) return;
+          if (!attrOriginal.has(el)) attrOriginal.set(el, {});
+          const bag = attrOriginal.get(el);
+          if (!(attr in bag)) bag[attr] = el.getAttribute(attr) || '';
+          const original = bag[attr];
+          if (lang === 'ar') {
+            el.setAttribute(attr, original);
+          } else {
+            const mapped = normalizedMap[normalizeKey(original)];
+            if (mapped) el.setAttribute(attr, mapped);
+          }
+        });
+      });
+    };
+
+    const applyLang = (lang) => {
+      const dict = translations[lang] || translations.ar;
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      localStorage.setItem('siteLang', lang);
+
+      langToggle.innerHTML = `<i class="fa-solid fa-language"></i> ${lang === 'ar' ? 'English' : 'العربية'}`;
+      langToggle.setAttribute('aria-pressed', lang === 'ar' ? 'true' : 'false');
+
+      const navLinks = $$('#primaryNav .nav-link');
+      navLinks.forEach((a, i) => { if (dict.nav[i]) a.textContent = dict.nav[i]; });
+
+      setText('.hero-tag', dict.heroTag);
+      const heroH1 = $('.hero-content h1');
+      if (heroH1) {
+        const span = heroH1.querySelector('span');
+        if (heroH1.childNodes[0]) heroH1.childNodes[0].nodeValue = `${dict.heroH1Line1} `;
+        if (span) span.textContent = dict.heroH1Line2;
+      }
+      setText('.hero-content p', dict.heroP);
+      setText('.hero-actions .btn.primary', dict.heroPrimary);
+      setText('.hero-actions .btn.outline', dict.heroSecondary);
+
+      setText('.initiative-tag', dict.initiativeTag);
+      setText('#initiative h2', dict.initiativeH2);
+      setText('#initiative .initiative-copy > p:nth-of-type(1)', dict.initiativeP1);
+      setText('#initiative .initiative-copy > p:nth-of-type(2)', dict.initiativeP2);
+      const initiativePoints = $$('#initiative .initiative-point span');
+      if (initiativePoints[0]) initiativePoints[0].textContent = dict.initiativePoint1;
+      if (initiativePoints[1]) initiativePoints[1].textContent = dict.initiativePoint2;
+      if (initiativePoints[2]) initiativePoints[2].textContent = dict.initiativePoint3;
+      setText('.initiative-actions .btn.primary', dict.initiativeBtn1);
+      setText('.initiative-actions .btn.outline', dict.initiativeBtn2);
+      setText('#initiative .initiative-badge', dict.initiativeBadge);
+      setText('#initiative .initiative-highlight h3', dict.initiativeHighlightH3);
+      setText('#initiative .initiative-highlight p', dict.initiativeHighlightP);
+
+      setText('.wa-kicker', dict.modalKicker);
+      setText('.wa-header h3', dict.modalH3);
+      setText('.wa-header p', dict.modalP);
+      setText('label[for="name"]', `${dict.label_name} *`);
+      setText('label[for="cont"]', `${dict.label_cont} *`);
+      setText('label[for="birthDate"]', `${dict.label_birth} *`);
+      const inputName = $('#name');
+      const inputCont = $('#cont');
+      if (inputName) inputName.placeholder = dict.placeholder_name;
+      if (inputCont) inputCont.placeholder = dict.placeholder_cont;
+      const genderGroup = $('.wa-field .radio-group');
+      if (genderGroup && genderGroup.previousElementSibling) {
+        genderGroup.previousElementSibling.textContent = `${dict.label_gender} *`;
+      }
+
+      const radios = $$('.radio-group label');
+      if (radios[0]) radios[0].lastChild.textContent = ` ${dict.radio_male}`;
+      if (radios[1]) radios[1].lastChild.textContent = ` ${dict.radio_female}`;
+
+      setText('.case-box p', `${dict.case_type} *`);
+      const caseLabels = $$('.case-box label');
+      if (caseLabels[0]) caseLabels[0].lastChild.textContent = ` ${dict.checkbox_lip}`;
+      if (caseLabels[1]) caseLabels[1].lastChild.textContent = ` ${dict.checkbox_palate}`;
+
+      setText('label[for="notes"]', `${dict.notes_label} *`);
+      const notes = $('#notes');
+      if (notes) notes.placeholder = dict.notes_placeholder;
+      setText('.wa-submit', dict.wa_submit);
+      setText('#social h2', dict.social_h2);
+
+      renderTimeline(lang);
+      applyPhraseMap(lang);
+    };
+
+    applyLang(localStorage.getItem('siteLang') || document.documentElement.lang || 'ar');
+    langToggle.addEventListener('click', () => {
+      const curr = document.documentElement.lang === 'ar' ? 'ar' : 'en';
+      applyLang(curr === 'ar' ? 'en' : 'ar');
+    });
+  }
+
+  function calculateAge(dateString) {
+    if (!dateString) return '';
+    const birth = new Date(dateString);
+    const today = new Date();
+    if (Number.isNaN(birth.getTime())) return '';
+
+    let years = today.getFullYear() - birth.getFullYear();
+    let months = today.getMonth() - birth.getMonth();
+    let days = today.getDate() - birth.getDate();
 
     if (days < 0) {
-        months--;
-        days += new Date(t.getFullYear(), t.getMonth(), 0).getDate();
+      months -= 1;
+      const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+      days += prevMonth;
     }
     if (months < 0) {
-        years--;
-        months += 12;
-    }
-    return `${years} سنة – ${months} شهر – ${days} يوم`;
-}
-
-/* ===============================
-   إرسال واتساب
-================================ */
-function sendWhatsApp() {
-    const name = document.getElementById("name").value.trim();
-    const cont = document.getElementById("cont").value.trim();
-    const birth = document.getElementById("birthDate").value;
-    const lip = document.getElementById("lip").checked;
-    const palate = document.getElementById("palate").checked;
-    const gender = document.querySelector('input[name="gender"]:checked')?.value || '';
-    const notes = document.getElementById("notes").value.trim();
-
-    if (!name || !cont || !birth || !gender || !notes || (!lip && !palate)) {
-        alert("من فضلك أكمل كل البيانات");
-        return;
+      years -= 1;
+      months += 12;
     }
 
-    const caseType = `${lip ? "شفة أرنبية " : ""}${palate ? "شق سقف الحلق" : ""}`.trim();
-    const age = calculateExactAge(birth);
+    return `${years} سنة - ${months} شهر - ${days} يوم`;
+  }
 
-    const msg = `اسم المريض: ${name}
-بلد الإقامة: ${cont}
-العمر: ${age}
-نوع الحالة: ${caseType}
-الجنس: ${gender}
-الخدمة المطلوبة: ${notes}`;
+  function setupModalAndWhatsApp() {
+    const modal = $('#waModal');
 
-    window.open(`https://api.whatsapp.com/send?phone=201095715211&text=${encodeURIComponent(msg)}`, "_blank");
-    closeForm();
-}
-
-/* ===============================
-   العداد + الصوت
-================================ */
-document.addEventListener("DOMContentLoaded", function () {
-    const counters = document.querySelectorAll(".counter");
-    const dingSound = new Audio("ding-80828.mp3");
-    let soundEnabled = false;
-    let soundPlayed = false;
-
-    // تفعيل الصوت بعد أول تفاعل مع الصفحة
-    function enableSound() {
-        dingSound.play().then(() => {
-            dingSound.pause();
-            dingSound.currentTime = 0;
-            soundEnabled = true;
-        }).catch(() => {});
-        window.removeEventListener("scroll", enableSound);
-        window.removeEventListener("click", enableSound);
-    }
-    window.addEventListener("scroll", enableSound, { once: true });
-    window.addEventListener("click", enableSound, { once: true });
-
-    counters.forEach(counter => {
-        const target = parseInt(counter.dataset.target);
-        if (isNaN(target)) return;
-
-        let count = 0;
-        const speed = Math.max(target / 200, 1);
-
-        function update() {
-            count += speed;
-            if (count < target) {
-                counter.innerText = Math.ceil(count);
-                requestAnimationFrame(update);
-            } else {
-                counter.innerText = target > 100 ? target + "+" : target + "%";
-                if (soundEnabled && !soundPlayed) {
-                    dingSound.currentTime = 0;
-                    dingSound.play();
-                    soundPlayed = true;
-                }
-            }
-        }
-
-        update();
-    });
-});
-
-/* ===============================
-   Dark Mode with localStorage
-================================ */
-document.addEventListener("DOMContentLoaded", () => {
-    const darkToggle = document.getElementById("darkToggle");
-    if (!darkToggle) return;
-
-    if (localStorage.getItem("darkMode") === "enabled") {
-        document.body.classList.add("dark");
-        darkToggle.textContent = "☀️ الوضع النهاري";
-        darkToggle.setAttribute('aria-pressed', 'true');
-    }
-
-    darkToggle.onclick = () => {
-        document.body.classList.toggle("dark");
-        const enabled = document.body.classList.contains("dark");
-        localStorage.setItem("darkMode", enabled ? "enabled" : "disabled");
-        darkToggle.textContent = enabled ? "☀️ الوضع النهاري" : "🌙 الوضع الليلي";
-        darkToggle.setAttribute('aria-pressed', enabled ? 'true' : 'false');
+    window.openForm = (event) => {
+      if (event) event.preventDefault();
+      if (!modal) return;
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
     };
-});
 
-/* ================================
-   Initialize theme switch checkbox (Uiverse)
-   Uses same localStorage key `darkMode` (value 'enabled'|'disabled')
-================================ */
-document.addEventListener('DOMContentLoaded', () => {
-    const chk = document.querySelector('.theme-switch__checkbox');
-    if (!chk) return;
+    window.closeForm = () => {
+      if (!modal) return;
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    };
 
-    function applyFromStorage() {
-        const saved = localStorage.getItem('darkMode');
-        const isDark = saved === 'enabled' || (saved === null && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
-        document.documentElement.classList.toggle('dark', !!isDark);
-        document.body.classList.toggle('dark', !!isDark);
-        chk.checked = !!isDark;
+    if (modal) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) window.closeForm();
+      });
     }
 
-    applyFromStorage();
+    window.sendWhatsApp = () => {
+      const name = ($('#name')?.value || '').trim();
+      const cont = ($('#cont')?.value || '').trim();
+      const birthDate = ($('#birthDate')?.value || '').trim();
+      const gender = $('input[name="gender"]:checked')?.value || '';
+      const lip = $('#lip')?.checked;
+      const palate = $('#palate')?.checked;
+      const notes = ($('#notes')?.value || '').trim();
 
-    chk.addEventListener('change', () => {
-        const on = chk.checked;
-        document.documentElement.classList.toggle('dark', !!on);
-        document.body.classList.toggle('dark', !!on);
-        try { localStorage.setItem('darkMode', on ? 'enabled' : 'disabled'); } catch(e){}
-        // try to sync old darkToggle if present
-        const oldBtn = document.getElementById('darkToggle');
-        if (oldBtn) oldBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
-    });
-});
+      if (!name || !cont || !birthDate || !gender || (!lip && !palate) || !notes) {
+        alert('من فضلك أكمل كل البيانات');
+        return;
+      }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const aboutTitle = Array.from(document.querySelectorAll(".site-footer .footer-col h4"))
-        .find((heading) => heading.textContent.includes("عن الموقع"));
+      const caseType = `${lip ? 'شفة أرنبية ' : ''}${palate ? 'شق سقف الحلق' : ''}`.trim();
+      const age = calculateAge(birthDate);
 
-    const aboutText = aboutTitle?.parentElement?.querySelector("p");
-    if (!aboutText) return;
+      const msg = `اسم المريض: ${name}\nبلد الإقامة: ${cont}\nالعمر: ${age}\nنوع الحالة: ${caseType}\nالجنس: ${gender}\nالخدمة المطلوبة: ${notes}`;
+      const phone = '201095715211';
+      const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+    };
+  }
 
-    aboutText.innerHTML = `
-        نحن هنا لنمنح أطفالكم ابتسامة كاملة! اكتشفوا برامجنا المجانية لعلاج الشفة الأرنبية وشق سقف الحلق،
-        وسهّلوا رحلة علاج طفلكم مع دعمنا الكامل وإرشاداتنا المتخصصة.
-        <br><br>
-        المبادرة المجانية لعمليات الشفة الارنبية وشق سقف الحلق بالمجان.
-        <br>
-        أكبر فريق طبي في الشرق الأوسط.
-    `;
-});
+  function setupCounters() {
+    const counters = $$('.impact-section .counter');
+    if (!counters.length) return;
 
-/* ===============================
-   تحسينات عامة
-================================ */
-document.addEventListener("keydown", e => {
-    if (e.key === "Escape") closeForm();
-});
+    const animateCounter = (el) => {
+      const target = Number(el.dataset.target || 0);
+      if (!target) return;
+      const duration = 1300;
+      const start = performance.now();
 
-document.querySelectorAll(".faq-question").forEach(btn => {
-    btn.setAttribute("tabindex", "0");
-    btn.addEventListener("keydown", e => {
-        if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            btn.click();
-        }
-    });
-});
+      const step = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const value = Math.floor(progress * target);
+        el.textContent = value.toLocaleString('en-US');
+        if (progress < 1) requestAnimationFrame(step);
+      };
 
-/* ===============================
-   مزامنة لون النافبار مع السكشن أسفلها
-================================ */
-document.addEventListener('DOMContentLoaded', () => {
-    const nav = document.querySelector('.navbar');
-    if (!nav || nav.classList.contains('nav-static')) return;
+      requestAnimationFrame(step);
+    };
 
-    let raf = null;
-    let resizeTimer = null;
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        animateCounter(entry.target);
+        obs.unobserve(entry.target);
+      });
+    }, { threshold: 0.35 });
 
-    function updateNavBg() {
-        if (raf) cancelAnimationFrame(raf);
-        raf = requestAnimationFrame(() => {
-            const rect = nav.getBoundingClientRect();
-            const x = Math.max(2, Math.min(window.innerWidth - 2, rect.left + rect.width / 2));
-            const y = Math.max(2, Math.min(window.innerHeight - 2, rect.bottom + 1));
-            const el = document.elementFromPoint(x, y);
-            if (!el) return;
+    counters.forEach((c) => io.observe(c));
+  }
 
-            const section = el.closest('.section') || el.closest('section') || el.closest('.hero') || document.body;
-            if (!section) return;
+  function setupStories() {
+    const textEl = $('#storyText');
+    const nameEl = $('#storyName');
+    const infoEl = $('#storyInfo');
+    const beforeImg = $('#beforeImg');
+    const afterImg = $('#afterImg');
+    const dots = $('#dots');
+    const nextBtn = $('#next');
+    const prevBtn = $('#prev');
 
-            // respect explicit opt-out
-            if (section.dataset && section.dataset.navSync === 'false') return;
+    if (!textEl || !nameEl || !infoEl || !beforeImg || !afterImg || !dots) return;
 
-            // explicit background override
-            if (section.dataset && section.dataset.navBg) {
-                nav.style.backgroundImage = '';
-                nav.style.backgroundColor = section.dataset.navBg;
-                return;
-            }
+    const stories = [
+      { text: 'كانت رحلة يوسف صعبة في البداية، لكن بفضل الله ثم الفريق الطبي أصبح يبتسم بثقة.', name: 'يوسف أحمد', info: '4 سنوات - الغربية', before: 'img/before.jpg', after: 'img/after.jpg' },
+      { text: 'ابنتي استعادت ثقتها بنفسها بعد العملية، والفرق كان واضحًا جدًا.', name: 'مريم خالد', info: '6 سنوات - الصعيد', before: 'img/before2.jpg', after: 'img/after2.jpg' },
+      { text: 'الابتسامة رجعت لحياة طفلنا من جديد، شكرًا لكل من ساهم.', name: 'آدم محمد', info: '5 سنوات - الإسكندرية', before: 'img/before3.jpg', after: 'img/after3.jpg' }
+    ];
 
-            const comp = getComputedStyle(section);
-            const bgImage = comp.backgroundImage;
-            let bgColor = comp.backgroundColor;
+    let current = 0;
 
-            if (!bgColor || bgColor === 'rgba(0, 0, 0, 0)' || bgColor === 'transparent') {
-                bgColor = getComputedStyle(document.body).backgroundColor || '';
-            }
+    const render = (i) => {
+      const s = stories[i];
+      textEl.textContent = s.text;
+      nameEl.textContent = s.name;
+      infoEl.textContent = s.info;
+      beforeImg.src = s.before;
+      afterImg.src = s.after;
+      $$('#dots span').forEach((d, idx) => d.classList.toggle('active', idx === i));
+    };
 
-            if (bgImage && bgImage !== 'none') {
-                nav.style.backgroundImage = bgImage;
-                nav.style.backgroundColor = '';
-            } else {
-                nav.style.backgroundImage = '';
-                nav.style.backgroundColor = bgColor || '';
-            }
-        });
-    }
-
-    // initial
-    updateNavBg();
-
-    // scroll is throttled via RAF inside
-    window.addEventListener('scroll', updateNavBg, { passive: true });
-
-    // debounce resize
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(updateNavBg, 120);
+    dots.innerHTML = '';
+    stories.forEach((_, i) => {
+      const dot = document.createElement('span');
+      dot.addEventListener('click', () => { current = i; render(current); });
+      dots.appendChild(dot);
     });
 
-    // respond to dark-mode/class/dir/lang changes
-    const obs = new MutationObserver(updateNavBg);
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class', 'dir', 'lang'] });
+    nextBtn?.addEventListener('click', () => { current = (current + 1) % stories.length; render(current); });
+    prevBtn?.addEventListener('click', () => { current = (current - 1 + stories.length) % stories.length; render(current); });
 
-    // mobile nav toggle
-    const navToggle = document.getElementById('navToggle');
-    const primaryNav = document.getElementById('primaryNav');
-    if (navToggle && primaryNav) {
-        navToggle.addEventListener('click', () => {
-            const open = nav.classList.toggle('nav-open');
-            navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-            if (open) primaryNav.querySelectorAll('a')[0]?.focus();
-        });
-    }
+    render(current);
+  }
 
-    // language toggle (simple): toggle dir + html lang and persist
-    const langToggle = document.getElementById('langToggle');
-    if (langToggle) {
-        // load translations from external file if present
-        const translations = window.siteTranslations || {};
-
-        // helper to set text while preserving child elements like <span>*</span>
-        // respects `data-no-translate` on the target element to skip translation
-        const isNoTranslate = (el) => el && el.getAttribute && (el.hasAttribute('data-no-translate') || el.classList.contains('no-translate'));
-
-        const setLabelFor = (forId, text) => {
-            const lbl = document.querySelector(`label[for="${forId}"]`);
-            if (!lbl || isNoTranslate(lbl)) return;
-            const span = lbl.querySelector('span');
-            if (span) {
-                const nodes = Array.from(lbl.childNodes);
-                nodes.forEach(n => { if (n.nodeType === Node.TEXT_NODE) lbl.removeChild(n); });
-                lbl.insertBefore(document.createTextNode(text + ' '), span);
-            } else {
-                lbl.textContent = text;
-            }
-        };
-
-        const setInlineLabel = (labelEl, text) => {
-            if (!labelEl || isNoTranslate(labelEl)) return;
-            const children = Array.from(labelEl.childNodes);
-            children.forEach(node => { if (node.nodeType === Node.TEXT_NODE) labelEl.removeChild(node); });
-            labelEl.appendChild(document.createTextNode(' ' + text));
-        };
-
-        const setTextIfAllowed = (el, text) => {
-            if (!el || isNoTranslate(el)) return;
-            el.textContent = text;
-        };
-
-        let applyLang = (lang) => {
-                const dict = translations[lang] || translations.ar;
-                document.documentElement.lang = lang;
-                document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-                localStorage.setItem('siteLang', lang);
-                // keep Font Awesome icon and update label text
-                langToggle.innerHTML = `<i class="fa-solid fa-language"></i> ${lang === 'ar' ? 'English' : 'العربية'}`;
-                langToggle.setAttribute('aria-pressed', lang === 'ar' ? 'true' : 'false');
-
-                // NAV links
-                const navLinks = document.querySelectorAll('#primaryNav .nav-link');
-                navLinks.forEach((a, i) => { if (dict.nav[i]) a.textContent = dict.nav[i]; });
-
-                // HERO
-                const heroTag = document.querySelector('.hero-tag'); if (heroTag) heroTag.textContent = dict.heroTag;
-                const h1 = document.querySelector('.hero-content h1');
-                if (h1) {
-                    const sp = h1.querySelector('span');
-                    h1.childNodes[0].nodeValue = dict.heroH1Line1 + ' ';
-                    if (sp) sp.textContent = dict.heroH1Line2;
-                }
-                const heroP = document.querySelector('.hero-content p'); if (heroP) heroP.textContent = dict.heroP;
-                const primaryBtn = document.querySelector('.hero-actions .btn.primary'); if (primaryBtn) primaryBtn.textContent = dict.heroPrimary;
-                const secondaryBtn = document.querySelector('.hero-actions .btn.outline'); if (secondaryBtn) secondaryBtn.textContent = dict.heroSecondary;
-
-                // Initiative
-                const initiativeTag = document.querySelector('.initiative-tag'); if (initiativeTag) initiativeTag.textContent = dict.initiativeTag;
-                const initiativeH2 = document.querySelector('#initiative h2'); if (initiativeH2) initiativeH2.textContent = dict.initiativeH2;
-                const initBtn1 = document.querySelector('.initiative-actions .btn.primary'); if (initBtn1) initBtn1.textContent = dict.initiativeBtn1;
-                const initBtn2 = document.querySelector('.initiative-actions .btn.outline'); if (initBtn2) initBtn2.textContent = dict.initiativeBtn2;
-
-                // Modal
-                const kicker = document.querySelector('.wa-kicker'); if (kicker) kicker.textContent = dict.modalKicker;
-                const waH3 = document.querySelector('.wa-header h3'); if (waH3) waH3.textContent = dict.modalH3;
-                const waP = document.querySelector('.wa-header p'); if (waP) waP.textContent = dict.modalP;
-                setLabelFor('name', dict.label_name);
-                setLabelFor('cont', dict.label_cont);
-                setLabelFor('birthDate', dict.label_birth);
-                // radio labels
-                const radioLabels = document.querySelectorAll('.radio-group label');
-                if (radioLabels[0]) setInlineLabel(radioLabels[0], dict.radio_male);
-                if (radioLabels[1]) setInlineLabel(radioLabels[1], dict.radio_female);
-                // checkboxes
-                const cbLip = document.querySelector('input#lip')?.parentElement; if (cbLip) setInlineLabel(cbLip, dict.checkbox_lip);
-                const cbPal = document.querySelector('input#palate')?.parentElement; if (cbPal) setInlineLabel(cbPal, dict.checkbox_palate);
-                setLabelFor('notes', dict.notes_label);
-                const notes = document.getElementById('notes'); if (notes) notes.setAttribute('placeholder', dict.notes_placeholder);
-                const waSubmit = document.querySelector('.wa-submit'); if (waSubmit) waSubmit.textContent = dict.wa_submit;
-
-                // Social section header
-                const socialH2 = document.querySelector('#social h2'); if (socialH2) socialH2.textContent = dict.social_h2;
-        };
-
-        // scan the whole site and assign data-i18n keys for any visible text nodes
-        const scanSiteForI18n = () => {
-            translations.ar = translations.ar || {};
-            translations.en = translations.en || {};
-            window.__i18nCounter = window.__i18nCounter || 1;
-            const excluded = ['SCRIPT','STYLE','NOSCRIPT','IFRAME','IMG','SVG','CANVAS','VIDEO','AUDIO','LINK','META'];
-
-            const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, false);
-            while (walker.nextNode()) {
-                const el = walker.currentNode;
-                if (!el || !el.tagName) continue;
-                if (isNoTranslate(el)) continue;
-                const tag = el.tagName.toUpperCase();
-                // handle placeholders for inputs & textareas
-                if ((tag === 'INPUT' || tag === 'TEXTAREA') && el.placeholder && !el.dataset.i18nPlaceholder) {
-                    const k = 'i18n_ph_' + (window.__i18nCounter++);
-                    el.dataset.i18nPlaceholder = k;
-                    translations.ar[k] = translations.ar[k] || el.placeholder;
-                }
-                if (excluded.includes(tag)) continue;
-                const textNodes = Array.from(el.childNodes).filter(n => n.nodeType === Node.TEXT_NODE && n.textContent.trim());
-                if (textNodes.length && !el.dataset.i18n) {
-                    const combined = textNodes.map(n => n.textContent.trim()).join(' ').trim();
-                    if (combined.length) {
-                        const k = 'i18n_tx_' + (window.__i18nCounter++);
-                        el.dataset.i18n = k;
-                        translations.ar[k] = translations.ar[k] || combined;
-                    }
-                }
-            }
-            console.log('i18n scan complete — keys created:', window.__i18nCounter - 1);
-        };
-
-        // export translations as a JSON file (ar + en)
-        const exportTranslations = () => {
-            const out = { ar: translations.ar || {}, en: translations.en || {} };
-            const blob = new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' });
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = 'site-translations.json';
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
-        };
-
-        // expose helpers for manual workflow
-        window.i18n = {
-            scan: scanSiteForI18n,
-            export: exportTranslations,
-            translations: translations,
-            apply: applyLang
-        };
-
-        // Phrase map: prefer external file mapping when available
-        const phraseMap = (translations && translations.phraseMap) ? translations.phraseMap : {};
-
-        const applyPhraseMap = (toLang) => {
-            if (toLang !== 'en') {
-                // revert to originals
-                document.querySelectorAll('[data-original-text]').forEach(el => {
-                    el.textContent = el.dataset.originalText;
-                    el.removeAttribute('data-original-text');
-                });
-                document.querySelectorAll('[data-original-placeholder]').forEach(el => {
-                    el.setAttribute('placeholder', el.dataset.originalPlaceholder);
-                    el.removeAttribute('data-original-placeholder');
-                });
-                return;
-            }
-
-            // replace text nodes matching keys
-            const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
-            const nodes = [];
-            while (walker.nextNode()) nodes.push(walker.currentNode);
-
-            nodes.forEach(textNode => {
-                const txt = textNode.textContent.trim();
-                if (!txt) return;
-                const parent = textNode.parentElement;
-                if (!parent || isNoTranslate(parent)) return;
-
-                // 1) exact-match replacement
-                const mapped = phraseMap[txt];
-                if (mapped) {
-                    if (!parent.hasAttribute('data-original-text')) parent.setAttribute('data-original-text', parent.textContent);
-                    parent.textContent = parent.textContent.replace(txt, mapped);
-                    return;
-                }
-
-                // 2) substring replacements: try replacing any known key appearing inside the parent's text
-                let replaced = false;
-                Object.keys(phraseMap).forEach(key => {
-                    const normalize = s => (s || '').replace(/\s+/g, ' ').trim();
-                    const pTextNorm = normalize(parent.textContent);
-                    const keyNorm = normalize(key);
-                    if (keyNorm && pTextNorm.includes(keyNorm)) {
-                        if (!parent.hasAttribute('data-original-text')) parent.setAttribute('data-original-text', parent.textContent);
-                        // perform replacement on the original text to preserve punctuation
-                        parent.textContent = parent.textContent.split(key).join(phraseMap[key]);
-                        // if direct split didn't work (due to different whitespace forms), use normalized replacement
-                        if (!parent.textContent.includes(phraseMap[key]) && pTextNorm.includes(keyNorm)) {
-                            parent.textContent = normalize(parent.textContent).split(keyNorm).join(phraseMap[key]);
-                        }
-                        replaced = true;
-                    }
-                });
-                if (replaced) return;
-            });
-
-            // placeholders
-            document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(el => {
-                if (isNoTranslate(el)) return;
-                const ph = el.getAttribute('placeholder') || '';
-                if (phraseMap[ph]) {
-                    if (!el.hasAttribute('data-original-placeholder')) el.setAttribute('data-original-placeholder', ph);
-                    el.setAttribute('placeholder', phraseMap[ph]);
-                }
-            });
-        };
-
-        // integrate into applyLang: after applying structured translations, run phrase map
-        const oldApplyLang = applyLang;
-        applyLang = (lang) => {
-            oldApplyLang(lang);
-            applyPhraseMap(lang);
-        };
-
-        // On initial load: ensure translations objects exist and attempt to auto-fill English
-        document.addEventListener('DOMContentLoaded', () => {
-            // ensure base objects
-            translations.ar = translations.ar || {};
-            translations.en = translations.en || {};
-
-            // run a scan to ensure keys exist
-            try { scanSiteForI18n(); } catch (e) { console.warn('i18n scan failed', e); }
-
-            // populate translations.en from phraseMap when possible
-            let mapped = 0, total = 0;
-            Object.keys(translations.ar).forEach(k => {
-                total++;
-                const arText = translations.ar[k];
-                const eng = (phraseMap && phraseMap[arText]) || translations.en[k] || '';
-                if (eng) {
-                    translations.en[k] = eng;
-                    mapped++;
-                }
-            });
-            console.info(`i18n: populated ${mapped}/${total} English entries from phraseMap.`);
-        });
-
-        const saved = localStorage.getItem('siteLang') || document.documentElement.lang || 'ar';
-        applyLang(saved);
-
-        langToggle.addEventListener('click', () => {
-            const current = document.documentElement.lang || 'ar';
-            const next = current === 'ar' ? 'en' : 'ar';
-            applyLang(next);
-            // minor layout fix after dir change
-            setTimeout(updateNavBg, 60);
-        });
-    }
-});
+  document.addEventListener('DOMContentLoaded', () => {
+    renderTimeline(document.documentElement.lang || 'ar');
+    setupTheme();
+    setupScrollTop();
+    setupNavbar();
+    setupFaq();
+    setupLanguage();
+    setupModalAndWhatsApp();
+    setupCounters();
+    setupStories();
+  });
+})();
