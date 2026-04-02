@@ -406,7 +406,7 @@ header p{
 
 /* SECTIONS */
 .section{
-    padding:70px 20px;
+    padding:56px 20px;
     max-width:1200px;
     margin:auto;
     align-items: center;
@@ -1237,11 +1237,11 @@ body.dark .wa-box textarea:focus{
   }
 
   .section{
-    padding:56px 16px;
+    padding:32px 14px;
   }
 
   .hero{
-    padding:56px 16px;
+    padding:40px 16px;
   }
 
   .hero-content{
@@ -1264,11 +1264,11 @@ body.dark .wa-box textarea:focus{
 
   .video-box{
     padding:20px 16px;
-    margin: 20px auto 56px;
+    margin: 20px auto 40px;
   }
 
   .impact-section{
-    padding: 20px 16px 56px;
+    padding: 20px 16px 40px;
   }
 }
 .video-box {
@@ -1277,7 +1277,7 @@ body.dark .wa-box textarea:focus{
   width: min(1200px, 95%);
   margin: 30px auto 70px;
   border-radius: 24px;
-  overflow: hidden;
+  overflow: visible;
   box-shadow: 0 14px 32px rgba(0,0,0,0.12);
   background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
 }
@@ -1299,7 +1299,7 @@ body.dark .wa-box textarea:focus{
   max-width: 800px; /* أقصى عرض */
   margin: 20px auto;
   border-radius: 15px;
-  overflow: hidden;
+  overflow: visible;
   box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
@@ -2124,25 +2124,28 @@ body.dark #langToggle {
 .whatsapp-btn {
   position: fixed;
   bottom: 20px;
-  left: 20px; /* ثابت على الشمال */
+  left: 20px;
   background-color: #25D366;
   color: white;
-  padding: 12px 18px;
-  border-radius: 50px;
+  width: 58px;
+  height: 58px;
+  padding: 0;
+  border-radius: 999px;
   font-size: 16px;
   font-weight: bold;
   text-decoration: none;
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  gap: 0;
   overflow: hidden;
   z-index: 9999;
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  transition: transform 0.2s, box-shadow 0.2s, padding 0.25s ease;
+  transition: transform 0.2s, box-shadow 0.2s, width 0.25s ease, padding 0.25s ease;
 }
 
 .whatsapp-btn::before {
-  content: "whatsup";
+  content: "WhatsApp";
   max-width: 0;
   opacity: 0;
   white-space: nowrap;
@@ -2151,9 +2154,11 @@ body.dark #langToggle {
 }
 
 .whatsapp-btn:hover {
+  width: 140px;
+  padding: 0 16px;
+  justify-content: flex-end;
+  gap: 8px;
   transform: scale(1.1);
-  padding-left: 22px;
-  padding-right: 24px;
   box-shadow: 0 6px 15px rgba(0,0,0,0.4);
 }
 
@@ -3128,6 +3133,351 @@ body.dark .form-wrapper {
 /* اليمين */
 .legacy-fixed-toggles #langToggle {
   right: 15px;
+}
+
+/* Common mistakes section */
+.mistakes-section {
+  max-width: 1200px;
+}
+
+.mistakes-intro {
+  text-align: center;
+  margin: 0 auto 20px;
+  max-width: 760px;
+  color: #3d4b63;
+  line-height: 1.8;
+}
+
+.mistakes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.mistake-card {
+  background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+  border: 1px solid rgba(1, 43, 115, 0.1);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 10px 28px rgba(7, 38, 94, 0.08);
+}
+
+.mistake-badge {
+  display: inline-block;
+  background: #ffe9e9;
+  color: #a11b1b;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.mistake-card h3 {
+  margin: 0 0 8px;
+  font-size: 19px;
+  color: #0b2e75;
+}
+
+.mistake-card p {
+  margin: 0 0 10px;
+  color: #334155;
+  line-height: 1.75;
+}
+
+.mistake-card strong {
+  color: #0f7b28;
+}
+
+body.dark .mistakes-intro {
+  color: #c3d2e8;
+}
+
+body.dark .mistake-card {
+  background: linear-gradient(180deg, #1a2538 0%, #121a2b 100%);
+  border-color: rgba(156, 196, 255, 0.2);
+}
+
+body.dark .mistake-card h3 {
+  color: #dbeafe;
+}
+
+body.dark .mistake-card p {
+  color: #c4d4eb;
+}
+
+@media (max-width: 900px) {
+  .mistakes-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .mistakes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.urgent-contact-section {
+  max-width: 1200px;
+}
+
+.urgent-contact-box {
+  background: linear-gradient(180deg, #fff7f7 0%, #fff 100%);
+  border: 1px solid rgba(185, 28, 28, 0.18);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 12px 30px rgba(185, 28, 28, 0.08);
+}
+
+.urgent-contact-box h2 {
+  margin: 0 0 10px;
+  color: #991b1b;
+}
+
+.urgent-note {
+  margin: 0 0 14px;
+  color: #5f1d1d;
+  line-height: 1.8;
+}
+
+.urgent-list {
+  margin: 0 0 18px;
+  padding: 0 20px 0 0;
+}
+
+.urgent-list li {
+  margin-bottom: 8px;
+  color: #3f2a2a;
+  line-height: 1.8;
+}
+
+.urgent-list li::marker {
+  color: #dc2626;
+}
+
+.urgent-cta {
+  display: inline-flex;
+}
+
+body.dark .urgent-contact-box {
+  background: linear-gradient(180deg, #2a1515 0%, #1a1111 100%);
+  border-color: rgba(248, 113, 113, 0.28);
+}
+
+body.dark .urgent-contact-box h2 {
+  color: #fca5a5;
+}
+
+body.dark .urgent-note,
+body.dark .urgent-list li {
+  color: #f8d0d0;
+}
+
+@media (max-width: 768px) {
+  .urgent-contact-box {
+    padding: 16px;
+  }
+}
+
+.quick-contact-section,
+.downloads-section,
+.myths-section {
+  max-width: 1200px;
+}
+
+.quick-contact-box {
+  text-align: center;
+  background: linear-gradient(180deg, #f7fbff 0%, #fff 100%);
+  border: 1px solid rgba(1, 43, 115, 0.12);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.quick-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 14px 0 8px;
+}
+
+.quick-contact-box small {
+  color: #4b5b74;
+}
+
+.downloads-intro {
+  text-align: center;
+  color: #41526d;
+  margin: 0 auto 14px;
+}
+
+.downloads-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.download-card {
+  display: grid;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(1, 43, 115, 0.1);
+  box-shadow: 0 10px 22px rgba(7, 38, 94, 0.08);
+}
+
+.download-card strong {
+  color: #0b2e75;
+}
+
+.download-card span {
+  color: #475569;
+}
+
+.myths-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.myth-card {
+  background: #fff;
+  border: 1px solid rgba(1, 43, 115, 0.1);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.myth-wrong {
+  color: #b91c1c;
+  font-weight: 700;
+}
+
+.myth-right {
+  color: #15803d;
+  font-weight: 700;
+}
+
+.myth-card p {
+  margin: 6px 0 10px;
+  color: #334155;
+}
+
+body.dark .quick-contact-box,
+body.dark .download-card,
+body.dark .myth-card {
+  background: #162235;
+  border-color: rgba(156, 196, 255, 0.2);
+}
+
+body.dark .quick-contact-box small,
+body.dark .downloads-intro,
+body.dark .download-card span,
+body.dark .myth-card p {
+  color: #c4d4eb;
+}
+
+body.dark .download-card strong {
+  color: #dbeafe;
+}
+
+@media (max-width: 900px) {
+  .downloads-grid,
+  .myths-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .downloads-grid,
+  .myths-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Journey progress helper */
+.journey-progress {
+  max-width: 920px;
+  margin: 0 auto 28px;
+  padding: 18px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(1, 43, 115, 0.12);
+  box-shadow: 0 8px 24px rgba(7, 38, 94, 0.08);
+}
+
+.journey-progress label {
+  display: block;
+  margin-bottom: 8px;
+  color: #012b73;
+  font-weight: 700;
+}
+
+.journey-progress select {
+  width: 100%;
+  border: 1px solid #d3e3ff;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-family: "Tajawal", sans-serif;
+  background: #f8fbff;
+  color: #0f172a;
+}
+
+.journey-meter {
+  margin-top: 12px;
+  height: 10px;
+  border-radius: 999px;
+  background: #e7eefb;
+  overflow: hidden;
+}
+
+#journeyMeterFill {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #0d9cff 0%, #36c3ff 100%);
+  transition: width 0.35s ease;
+}
+
+.journey-status {
+  margin-top: 12px;
+  display: grid;
+  gap: 6px;
+}
+
+.journey-status strong {
+  color: #0b3a8c;
+  font-size: 18px;
+}
+
+.journey-status span {
+  color: #334155;
+}
+
+.timeline-item.is-current .timeline-content {
+  border: 2px solid #0d9cff;
+  box-shadow: 0 14px 30px rgba(13, 156, 255, 0.16);
+}
+
+.timeline-item.is-done .timeline-content {
+  border: 1px solid rgba(56, 142, 60, 0.32);
+  background: linear-gradient(180deg, #f8fff8 0%, #ffffff 100%);
+}
+
+img[loading="lazy"] {
+  content-visibility: auto;
+}
+
+@media (max-width: 768px) {
+  .journey-progress {
+    margin-bottom: 18px;
+    padding: 14px;
+  }
+
+  .journey-status strong {
+    font-size: 16px;
+  }
 }
 
 
