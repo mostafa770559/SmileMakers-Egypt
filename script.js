@@ -8,8 +8,8 @@
       en: { label: 'Before Birth', type: 'special', desc: 'Initial assessment and treatment planning.' }
     },
     {
-      ar: { label: 'الولادة إلى 3 أشهر', type: 'special', desc: 'متابعة التغذية والنمو وتجهيز خطة العلاج.' },
-      en: { label: 'Birth to 3 Months', type: 'special', desc: 'Follow-up for feeding and growth, and treatment plan preparation.' }
+      ar: { label: 'الولادة إلى 3 أشهر', type: 'special', desc: 'متابعة التغذية والنمو وتجهيز خطة العلاج<br>تركيب جهاز التقويم والرضاعة لتحسين شكل الفم والانف والتحضير للعملية' },
+      en: { label: 'Birth to 3 Months', type: 'special', desc: 'Follow-up on feeding and growth and preparation of the treatment plan<br>Placement of a molding appliance and feeding support to improve the shape of the mouth and nose and prepare for surgery' }
     },
     {
       ar: { label: '3-6', title: 'عمر 3-6 أشهر', type: 'month', desc: 'عملية إصلاح الشفة الأرنبية.', year: 'إصلاح الشفة الأرنبية' },
@@ -32,6 +32,8 @@
       en: { label: '15-18', title: 'Adolescence', type: 'year', desc: 'Assessment for cosmetic or jaw correction surgeries when needed.' }
     }
   ];
+
+  let trackEvent = () => {};
 
   function renderTimeline(lang = 'ar') {
     const container = $('#monthlyTimeline');
@@ -119,6 +121,9 @@
 
     $$('#primaryNav .nav-link').forEach((a) => {
       a.addEventListener('click', () => {
+        trackEvent('nav_click', { href: a.getAttribute('href') || '' });
+      });
+      a.addEventListener('click', () => {
         if (window.innerWidth <= 600) setOpen(false);
       });
     });
@@ -142,7 +147,10 @@
         if (!item) return;
         const isOpen = item.classList.contains('active');
         $$('.faq-item.active').forEach((el) => el.classList.remove('active'));
-        if (!isOpen) item.classList.add('active');
+        if (!isOpen) {
+          item.classList.add('active');
+          trackEvent('faq_open', { question: (btn.textContent || '').replace('▼', '').trim().slice(0, 90) });
+        }
       });
       btn.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -279,8 +287,77 @@
       if (notes) notes.placeholder = dict.notes_placeholder;
       setText('.wa-submit', dict.wa_submit);
       setText('#social h2', dict.social_h2);
+      setText('label[for="ageStageSelect"]', dict.journeyLabel);
+
+      const ageOptions = $$('#ageStageSelect option');
+      if (Array.isArray(dict.ageOptions)) {
+        ageOptions.forEach((opt, i) => {
+          if (dict.ageOptions[i]) opt.textContent = dict.ageOptions[i];
+        });
+      }
+
+      setText('#mistakes h2', dict.mistakesTitle);
+      setText('#mistakes .mistakes-intro', dict.mistakesIntro);
+      if (Array.isArray(dict.mistakesCards)) {
+        $$('#mistakes .mistake-card').forEach((card, i) => {
+          const data = dict.mistakesCards[i];
+          if (!data) return;
+          const badge = card.querySelector('.mistake-badge');
+          const title = card.querySelector('h3');
+          const ps = card.querySelectorAll('p');
+          const strong = card.querySelector('strong');
+          if (badge) badge.textContent = data.badge;
+          if (title) title.textContent = data.title;
+          if (ps[0]) ps[0].textContent = data.wrong;
+          if (strong) strong.textContent = dict.mistakesCorrectLabel;
+          if (ps[1]) ps[1].textContent = data.correct;
+        });
+      }
+
+      setText('#urgent-contact h2', dict.urgentTitle);
+      setText('#urgent-contact .urgent-note', dict.urgentNote);
+      if (Array.isArray(dict.urgentItems)) {
+        const urgentLis = $$('#urgent-contact .urgent-list li');
+        urgentLis.forEach((li, i) => { if (dict.urgentItems[i]) li.textContent = dict.urgentItems[i]; });
+      }
+      setText('#urgent-contact .urgent-cta', dict.urgentCta);
+
+      setText('#save-contact h2', dict.saveContactTitle);
+      setText('#save-contact .quick-contact-box p', dict.saveContactText);
+      setText('#save-contact .quick-actions .btn.primary', dict.saveContactCall);
+      setText('#save-contact .quick-actions .btn.outline', dict.saveContactDownload);
+      setText('#save-contact .quick-contact-box small', dict.saveContactNumber);
+
+      setText('#downloads h2', dict.downloadsTitle);
+      setText('#downloads .downloads-intro', dict.downloadsIntro);
+      if (Array.isArray(dict.downloadsCards)) {
+        $$('#downloads .download-card').forEach((card, i) => {
+          const data = dict.downloadsCards[i];
+          if (!data) return;
+          const strong = card.querySelector('strong');
+          const span = card.querySelector('span');
+          if (strong) strong.textContent = data.title;
+          if (span) span.textContent = data.desc;
+        });
+      }
+
+      setText('#myths h2', dict.mythsTitle);
+      if (Array.isArray(dict.mythsCards)) {
+        $$('#myths .myth-card').forEach((card, i) => {
+          const data = dict.mythsCards[i];
+          if (!data) return;
+          const wrongLbl = card.querySelector('.myth-wrong');
+          const rightLbl = card.querySelector('.myth-right');
+          const ps = card.querySelectorAll('p');
+          if (wrongLbl) wrongLbl.textContent = dict.mythWrongLabel;
+          if (ps[0]) ps[0].textContent = data.wrong;
+          if (rightLbl) rightLbl.textContent = dict.mythRightLabel;
+          if (ps[1]) ps[1].textContent = data.right;
+        });
+      }
 
       renderTimeline(lang);
+      window.dispatchEvent(new CustomEvent('timeline:rendered'));
       applyPhraseMap(lang);
     };
 
@@ -322,12 +399,14 @@
       if (!modal) return;
       modal.style.display = 'flex';
       document.body.style.overflow = 'hidden';
+      trackEvent('wa_modal_open');
     };
 
     window.closeForm = () => {
       if (!modal) return;
       modal.style.display = 'none';
       document.body.style.overflow = '';
+      trackEvent('wa_modal_close');
     };
 
     if (modal) {
@@ -356,8 +435,147 @@
       const msg = `اسم المريض: ${name}\nبلد الإقامة: ${cont}\nالعمر: ${age}\nنوع الحالة: ${caseType}\nالجنس: ${gender}\nالخدمة المطلوبة: ${notes}`;
       const phone = '201095715211';
       const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+      trackEvent('wa_submit', { country: cont.slice(0, 40), case_type: caseType });
       window.open(url, '_blank');
     };
+  }
+
+  function setupTreatmentProgress() {
+    const select = $('#ageStageSelect');
+    const meter = $('#journeyMeterFill');
+    const meterWrap = $('.journey-meter');
+    const currentEl = $('#journeyCurrent');
+    const nextEl = $('#journeyNext');
+    const timelineItems = () => $$('#monthlyTimeline .timeline-item');
+    if (!select || !meter || !currentEl || !nextEl) return;
+
+    const getItem = (idx) => {
+      const lang = document.documentElement.lang === 'en' ? 'en' : 'ar';
+      return (timelineData[idx] && (timelineData[idx][lang] || timelineData[idx].ar)) || null;
+    };
+
+    const update = (rawIndex, shouldTrack = false) => {
+      const index = Math.max(0, Math.min(timelineData.length - 1, Number(rawIndex) || 0));
+      const current = getItem(index);
+      const next = getItem(index + 1);
+      const percent = ((index + 1) / timelineData.length) * 100;
+
+      select.value = String(index);
+      meter.style.width = `${percent}%`;
+      meterWrap?.setAttribute('aria-valuenow', String(Math.round(percent)));
+
+      const dict = (window.siteTranslations && window.siteTranslations[document.documentElement.lang]) || (window.siteTranslations && window.siteTranslations.ar) || {};
+
+      if (current) {
+        const currentLabel = current.title || current.label;
+        currentEl.textContent = `${dict.journeyCurrentPrefix || 'المرحلة الحالية: '}${currentLabel}`;
+      }
+
+      if (next) {
+        nextEl.innerHTML = `${dict.journeyNextPrefix || 'الخطوة التالية: '}${next.desc}`;
+      } else {
+        nextEl.textContent = `${dict.journeyNextPrefix || 'الخطوة التالية: '}${dict.journeyNextFinal || 'المتابعة الدورية والتقييم التجميلي النهائي عند الحاجة.'}`;
+      }
+
+      timelineItems().forEach((el, idx) => {
+        el.classList.toggle('is-current', idx === index);
+        el.classList.toggle('is-done', idx < index);
+      });
+
+      if (shouldTrack && current) {
+        trackEvent('journey_stage_selected', {
+          stage_index: index + 1,
+          stage_label: (current.title || current.label || '').slice(0, 70)
+        });
+      }
+    };
+
+    select.addEventListener('change', () => update(select.value, true));
+    window.addEventListener('timeline:rendered', () => update(select.value, false));
+    update(select.value, false);
+  }
+
+  function setupPerformanceHints() {
+    $$('img').forEach((img) => {
+      const inHero = !!img.closest('.hero-image');
+      if (inHero) {
+        img.loading = 'eager';
+        img.decoding = 'async';
+        img.fetchPriority = 'high';
+      } else {
+        if (!img.hasAttribute('loading')) img.loading = 'lazy';
+        if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      }
+    });
+
+    $$('iframe').forEach((frame) => {
+      if (!frame.hasAttribute('loading')) frame.setAttribute('loading', 'lazy');
+    });
+
+    $$('a[target="_blank"]').forEach((a) => {
+      const rel = (a.getAttribute('rel') || '').split(' ').filter(Boolean);
+      if (!rel.includes('noopener')) rel.push('noopener');
+      if (!rel.includes('noreferrer')) rel.push('noreferrer');
+      a.setAttribute('rel', rel.join(' '));
+    });
+  }
+
+  function setupAnalytics() {
+    const cfg = window.SITE_ANALYTICS || {};
+    const gaId = (cfg.ga4MeasurementId || '').trim();
+    const plausibleDomain = (cfg.plausibleDomain || '').trim();
+
+    const pushGA = (name, props = {}) => {
+      if (!window.gtag) return;
+      window.gtag('event', name, props);
+    };
+
+    const pushPlausible = (name, props = {}) => {
+      if (typeof window.plausible !== 'function') return;
+      window.plausible(name, { props });
+    };
+
+    if (/^G-[A-Z0-9]+$/i.test(gaId)) {
+      const s1 = document.createElement('script');
+      s1.async = true;
+      s1.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+      document.head.appendChild(s1);
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function gtag() { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', gaId);
+    }
+
+    if (plausibleDomain) {
+      const s2 = document.createElement('script');
+      s2.defer = true;
+      s2.setAttribute('data-domain', plausibleDomain);
+      s2.src = 'https://plausible.io/js/script.js';
+      document.head.appendChild(s2);
+    }
+
+    trackEvent = (name, props = {}) => {
+      const cleanProps = Object.fromEntries(
+        Object.entries(props).filter(([, v]) => ['string', 'number', 'boolean'].includes(typeof v))
+      );
+      pushGA(name, cleanProps);
+      pushPlausible(name, cleanProps);
+    };
+    window.siteTrackEvent = trackEvent;
+
+    trackEvent('page_view', { lang: document.documentElement.lang || 'ar' });
+
+    const sectionObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const id = entry.target.id || entry.target.className || 'section';
+        trackEvent('section_view', { section: String(id).slice(0, 50) });
+        obs.unobserve(entry.target);
+      });
+    }, { threshold: 0.4 });
+
+    $$('section[id]').forEach((sec) => sectionObserver.observe(sec));
   }
 
   function setupCounters() {
@@ -435,12 +653,15 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
+    setupAnalytics();
+    setupPerformanceHints();
     renderTimeline(document.documentElement.lang || 'ar');
     setupTheme();
     setupScrollTop();
     setupNavbar();
     setupFaq();
     setupLanguage();
+    setupTreatmentProgress();
     setupModalAndWhatsApp();
     setupCounters();
     setupStories();
