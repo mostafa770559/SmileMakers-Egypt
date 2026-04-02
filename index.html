@@ -3,11 +3,91 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SmileMakers - Egypt</title>
+<title>علاج الشفة الأرنبية وشق سقف الحلق مجانًا | مستشفى دار الشفا طنطا</title>
+<meta name="description" content="مبادرة مجانية من مستشفى دار الشفا بطنطا لعلاج الشفة الأرنبية وشق سقف الحلق للأطفال. تسجيل عبر واتساب، متابعة طبية متكاملة، وإجابات واضحة لأهم الأسئلة.">
+<meta name="keywords" content="الشفة الأرنبية, شق سقف الحلق, عمليات مجانية, مستشفى دار الشفا طنطا, جراحة أطفال, علاج تشوهات الوجه">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0d9cff">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_EG">
+<meta property="og:title" content="علاج الشفة الأرنبية وشق سقف الحلق مجانًا | مستشفى دار الشفا طنطا">
+<meta property="og:description" content="سجّل حالة طفلك عبر واتساب وتابع رحلة العلاج خطوة بخطوة مع فريق طبي متخصص في مستشفى دار الشفا بطنطا.">
+<meta property="og:image" content="teamphoto.jpeg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="علاج الشفة الأرنبية وشق سقف الحلق مجانًا">
+<meta name="twitter:description" content="مبادرة مجانية للأطفال من داخل مصر وخارجها مع متابعة طبية متكاملة.">
+<link rel="canonical" href="https://smilemakers-eg.com/">
 <link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="preload" as="image" href="teamphoto.jpeg" fetchpriority="high">
 <link rel="icon" href="wep-logo.png" type="icon">
+<script>
+  window.SITE_ANALYTICS = {
+    ga4MeasurementId: "",
+    plausibleDomain: ""
+  };
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalClinic",
+  "name": "مستشفى دار الشفا بطنطا",
+  "url": "https://smilemakers-eg.com/",
+  "description": "مبادرة مجانية لعلاج الشفة الأرنبية وشق سقف الحلق للأطفال مع متابعة طبية متعددة التخصصات.",
+  "telephone": "+20-109-571-5211",
+  "medicalSpecialty": ["Pediatric", "PlasticSurgery", "Otolaryngologic"],
+  "areaServed": "EG",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "EG",
+    "addressLocality": "طنطا",
+    "streetAddress": "شارع معاوية ناصية عمرو بن العاص"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "ما سبب حدوث الشفة الأرنبية أو شق سقف الحلق؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "يحدث بسبب عدم اكتمال التحام أنسجة الوجه أثناء الحمل، وقد تتداخل عوامل وراثية أو بيئية."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "متى تُجرى عملية الشفة الأرنبية؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "عادة بين عمر 3 و6 أشهر حسب تقييم الجراح والحالة الصحية للطفل."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "متى يُغلق شق سقف الحلق؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "غالبًا بين 9 و12 شهرًا لتحسين النطق وتقليل مشاكل الأذن."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "هل العمليات مجانية بالكامل؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "نعم، تتم العمليات ضمن المبادرة بشكل مجاني بعد تقييم الحالة."
+      }
+    }
+  ]
+}
+</script>
 
 <style>
 
@@ -291,6 +371,24 @@ onclick="openForm()" class="btn primary">احجز موعدك الآن</a>
   <p class="subtitle">
     نرافقك في كل مرحلة من مراحل العلاج، ونضمن لطفلك رعاية متكاملة على يد فريق من الخبراء.
   </p>
+        <div class="journey-progress" id="journeyProgress">
+            <label for="ageStageSelect">اختَر عمر الطفل لمعرفة المرحلة الحالية</label>
+            <select id="ageStageSelect">
+                <option value="0">قبل الولادة</option>
+                <option value="1">الولادة إلى 3 أشهر</option>
+                <option value="2">3 إلى 6 أشهر</option>
+                <option value="3">9 إلى 12 شهرًا</option>
+                <option value="4">من سنة إلى 5 سنوات</option>
+                <option value="5">من 6 إلى 12 سنة</option>
+                <option value="6">مرحلة المراهقة</option>
+            </select>
+            <div class="journey-meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <span id="journeyMeterFill"></span>
+            </div>
+            <div class="journey-status">
+                <strong id="journeyCurrent">المرحلة الحالية: قبل الولادة</strong>
+                <span id="journeyNext">الخطوة التالية:متابعة التغذية والنمو وتجهيز خطة العلاج و تركيب جهاز التقويم والرضاعة لتحسين شكل الفم والانف والتحضير للعملية.</span>            </div>
+        </div>
         <!-- المخطط الزمني الشهري -->
         <div class="timeline-container">
             <h2>المخطط الزمني</h2>
@@ -304,15 +402,16 @@ onclick="openForm()" class="btn primary">احجز موعدك الآن</a>
 
 <div class="video-box" > 
  <h2>تعرف علي المزيد من خلال قناتنا على اليوتيوب</h2>
-  <iframe 
+ <iframe 
     src="https://www.youtube.com/embed/R4QBVlueC3k?si=Y21GMtpuX_SIhhWw" 
     title="YouTube video player" 
     frameborder="0" 
+    loading="lazy"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
     allowfullscreen>
   </iframe>
  <h1 class="our-ser">فعاليات</h1> 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/rOCqUjSZzAE?si=Emxnop-0sAoXDZB8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/rOCqUjSZzAE?si=Emxnop-0sAoXDZB8" title="YouTube video player" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 
@@ -681,6 +780,129 @@ onclick="openForm()" class="btn primary">احجز موعدك الآن</a>
 
 
  
+</section>
+<section class="section mistakes-section" id="mistakes">
+  <h2 class="our-ser">أخطاء شائعة للأهل بعد العملية</h2>
+  <p class="mistakes-intro">تجنّب هذه الأخطاء يساعد على التئام أفضل، ونتيجة أجمل، ومضاعفات أقل.</p>
+
+  <div class="mistakes-grid">
+    <article class="mistake-card">
+      <span class="mistake-badge">❌ الرضاعة</span>
+      <h3>استخدام طريقة رضاعة غير مناسبة</h3>
+      <p>بعض الأطفال يحتاجون وضعية أو أداة رضاعة خاصة في الفترة الأولى.</p>
+      <strong>✅ الصحيح:</strong>
+      <p>اتّبع تعليمات الفريق الطبي لنوع الرضاعة والكمية وتوقيت كل وجبة.</p>
+    </article>
+
+    <article class="mistake-card">
+      <span class="mistake-badge">❌ الجرح</span>
+      <h3>لمس الجرح أو تنظيفه بعنف</h3>
+      <p>التنظيف القاسي أو استخدام مواد غير موصى بها قد يبطّئ الالتئام.</p>
+      <strong>✅ الصحيح:</strong>
+      <p>نظّف المنطقة بلطف بالطريقة المحددة فقط، والتزم بالدواء في مواعيده.</p>
+    </article>
+
+    <article class="mistake-card">
+      <span class="mistake-badge">❌ المتابعة</span>
+      <h3>تأخير مواعيد المتابعة</h3>
+      <p>تأجيل الزيارات قد يؤخر اكتشاف مشاكل بسيطة يمكن علاجها مبكرًا.</p>
+      <strong>✅ الصحيح:</strong>
+      <p>احضر كل الزيارات المحددة حتى لو كان الطفل يبدو بخير.</p>
+    </article>
+
+    <article class="mistake-card">
+      <span class="mistake-badge">❌ الأكل</span>
+      <h3>إعطاء أطعمة صلبة مبكرًا</h3>
+      <p>الطعام غير المناسب قد يضغط على الجرح أو يسبب ألمًا للطفل.</p>
+      <strong>✅ الصحيح:</strong>
+      <p>ابدأ بالتدرج الغذائي حسب الخطة التي يحددها الطبيب فقط.</p>
+    </article>
+
+    <article class="mistake-card">
+      <span class="mistake-badge">❌ المنزل</span>
+      <h3>إهمال نظافة اليدين قبل التعامل مع الطفل</h3>
+      <p>العدوى المنزلية من أكثر الأسباب الشائعة لالتهاب الجرح.</p>
+      <strong>✅ الصحيح:</strong>
+      <p>اغسل اليدين جيدًا قبل الرضاعة أو تغيير الضماد أو إعطاء الدواء.</p>
+    </article>
+
+    <article class="mistake-card">
+      <span class="mistake-badge">❌ الطوارئ</span>
+      <h3>الانتظار عند ظهور أعراض مقلقة</h3>
+      <p>الحمى، نزيف مستمر، أو رفض الأكل تحتاج تواصلًا سريعًا مع الفريق.</p>
+      <strong>✅ الصحيح:</strong>
+      <p>تواصل فورًا مع المستشفى أو عبر واتساب عند أي علامة غير طبيعية.</p>
+    </article>
+  </div>
+</section>
+<section class="section urgent-contact-section" id="urgent-contact">
+  <div class="urgent-contact-box">
+    <h2>متى أتواصل فورًا مع الفريق الطبي؟</h2>
+    <p class="urgent-note">إذا ظهر أي عرض من العلامات التالية بعد العملية، لا تنتظر وتواصل مباشرة مع المستشفى أو عبر واتساب.</p>
+    <ul class="urgent-list">
+      <li>ارتفاع الحرارة بشكل مستمر أو مفاجئ.</li>
+      <li>نزيف لا يتوقف من مكان الجراحة.</li>
+      <li>رفض الرضاعة أو الأكل لفترة ملحوظة.</li>
+      <li>تورّم زائد أو إفرازات غير طبيعية من الجرح.</li>
+      <li>قيء متكرر أو خمول شديد غير معتاد.</li>
+      <li>صعوبة في التنفس أو ازرقاق الشفاه.</li>
+    </ul>
+    <a href="javascript:void(0)" class="btn primary urgent-cta" onclick="openForm(event)">تواصل واتساب الآن</a>
+  </div>
+</section>
+<section class="section quick-contact-section" id="save-contact">
+  <h2 class="our-ser">احفظ رقم المستشفى بسرعة</h2>
+  <div class="quick-contact-box">
+    <p>احفظ الرقم الآن لتسهيل التواصل السريع وقت الحاجة.</p>
+    <div class="quick-actions">
+      <a class="btn primary" href="tel:+201095715211">اتصال مباشر</a>
+      <a class="btn outline" href="guides/dar-elshefaa-contact.vcf" download>حفظ جهة الاتصال</a>
+    </div>
+    <small>رقم المستشفى: 01095715211</small>
+  </div>
+</section>
+
+<section class="section downloads-section" id="downloads">
+  <h2 class="our-ser">تحميلات مفيدة للأهل</h2>
+  <p class="downloads-intro">حمّل الإرشادات المختصرة واحتفظ بها على الهاتف للرجوع السريع.</p>
+  <div class="downloads-grid">
+    <a class="download-card" href="guides/pre-op-checklist.txt" download>
+      <strong>Checklist قبل العملية</strong>
+      <span>خطوات تجهيز الطفل قبل يوم العملية</span>
+    </a>
+    <a class="download-card" href="guides/post-op-care.txt" download>
+      <strong>إرشادات ما بعد العملية</strong>
+      <span>العناية بالجرح والمتابعة الدورية</span>
+    </a>
+    <a class="download-card" href="guides/feeding-guide.txt" download>
+      <strong>دليل التغذية بعد العملية</strong>
+      <span>كيف تُقدّم الرضاعة والأكل بشكل آمن</span>
+    </a>
+  </div>
+</section>
+
+<section class="section myths-section" id="myths">
+  <h2 class="our-ser">معلومات صحيحة vs معلومات منتشرة غلط</h2>
+  <div class="myths-grid">
+    <article class="myth-card">
+      <span class="myth-wrong">❌ غلط:</span>
+      <p>الشفة الأرنبية معناها الطفل عنده مشكلة في الذكاء.</p>
+      <span class="myth-right">✅ الصحيح:</span>
+      <p>لا علاقة مباشرة بين الشفة الأرنبية ومستوى الذكاء.</p>
+    </article>
+    <article class="myth-card">
+      <span class="myth-wrong">❌ غلط:</span>
+      <p>لو تأخرنا في المتابعة مش هتفرق.</p>
+      <span class="myth-right">✅ الصحيح:</span>
+      <p>المتابعة المبكرة تقلل المضاعفات وتحسن النتائج بشكل واضح.</p>
+    </article>
+    <article class="myth-card">
+      <span class="myth-wrong">❌ غلط:</span>
+      <p>العملية الواحدة تكفي لكل المراحل.</p>
+      <span class="myth-right">✅ الصحيح:</span>
+      <p>العلاج غالبًا يكون على مراحل حسب عمر الطفل واحتياجه.</p>
+    </article>
+  </div>
 </section>
 <section class="impact-section">
   <div class="impact-box">
