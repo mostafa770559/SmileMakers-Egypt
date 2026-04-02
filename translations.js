@@ -36,7 +36,47 @@ window.siteTranslations = {
     notes_label: 'الخدمة المطلوبة',
     notes_placeholder: 'اكتب تفاصيل الحالة أو الخدمة المطلوبة / Describe the case or required service',
     wa_submit: 'إرسال عبر واتساب',
-    social_h2: 'تابعنا وكن جزءًا من التوعية'
+    social_h2: 'تابعنا وكن جزءًا من التوعية',
+    journeyLabel: 'اختَر عمر الطفل لمعرفة المرحلة الحالية',
+    journeyCurrentPrefix: 'المرحلة الحالية: ',
+    journeyNextPrefix: 'الخطوة التالية: ',
+    journeyNextFinal: 'المتابعة الدورية والتقييم التجميلي النهائي عند الحاجة.',
+    ageOptions: ['قبل الولادة', 'الولادة إلى 3 أشهر', '3 إلى 6 أشهر', '9 إلى 12 شهرًا', 'من سنة إلى 5 سنوات', 'من 6 إلى 12 سنة', 'مرحلة المراهقة'],
+    mistakesTitle: 'أخطاء شائعة للأهل بعد العملية',
+    mistakesIntro: 'تجنّب هذه الأخطاء يساعد على التئام أفضل، ونتيجة أجمل، ومضاعفات أقل.',
+    mistakesCorrectLabel: '✅ الصحيح:',
+    mistakesCards: [
+      { badge: '❌ الرضاعة', title: 'استخدام طريقة رضاعة غير مناسبة', wrong: 'بعض الأطفال يحتاجون وضعية أو أداة رضاعة خاصة في الفترة الأولى.', correct: 'اتّبع تعليمات الفريق الطبي لنوع الرضاعة والكمية وتوقيت كل وجبة.' },
+      { badge: '❌ الجرح', title: 'لمس الجرح أو تنظيفه بعنف', wrong: 'التنظيف القاسي أو استخدام مواد غير موصى بها قد يبطّئ الالتئام.', correct: 'نظّف المنطقة بلطف بالطريقة المحددة فقط، والتزم بالدواء في مواعيده.' },
+      { badge: '❌ المتابعة', title: 'تأخير مواعيد المتابعة', wrong: 'تأجيل الزيارات قد يؤخر اكتشاف مشاكل بسيطة يمكن علاجها مبكرًا.', correct: 'احضر كل الزيارات المحددة حتى لو كان الطفل يبدو بخير.' },
+      { badge: '❌ الأكل', title: 'إعطاء أطعمة صلبة مبكرًا', wrong: 'الطعام غير المناسب قد يضغط على الجرح أو يسبب ألمًا للطفل.', correct: 'ابدأ بالتدرج الغذائي حسب الخطة التي يحددها الطبيب فقط.' },
+      { badge: '❌ المنزل', title: 'إهمال نظافة اليدين قبل التعامل مع الطفل', wrong: 'العدوى المنزلية من أكثر الأسباب الشائعة لالتهاب الجرح.', correct: 'اغسل اليدين جيدًا قبل الرضاعة أو تغيير الضماد أو إعطاء الدواء.' },
+      { badge: '❌ الطوارئ', title: 'الانتظار عند ظهور أعراض مقلقة', wrong: 'الحمى، نزيف مستمر، أو رفض الأكل تحتاج تواصلًا سريعًا مع الفريق.', correct: 'تواصل فورًا مع المستشفى أو عبر واتساب عند أي علامة غير طبيعية.' }
+    ],
+    urgentTitle: 'متى أتواصل فورًا مع الفريق الطبي؟',
+    urgentNote: 'إذا ظهر أي عرض من العلامات التالية بعد العملية، لا تنتظر وتواصل مباشرة مع المستشفى أو عبر واتساب.',
+    urgentItems: ['ارتفاع الحرارة بشكل مستمر أو مفاجئ.', 'نزيف لا يتوقف من مكان الجراحة.', 'رفض الرضاعة أو الأكل لفترة ملحوظة.', 'تورّم زائد أو إفرازات غير طبيعية من الجرح.', 'قيء متكرر أو خمول شديد غير معتاد.', 'صعوبة في التنفس أو ازرقاق الشفاه.'],
+    urgentCta: 'تواصل واتساب الآن',
+    saveContactTitle: 'احفظ رقم المستشفى بسرعة',
+    saveContactText: 'احفظ الرقم الآن لتسهيل التواصل السريع وقت الحاجة.',
+    saveContactCall: 'اتصال مباشر',
+    saveContactDownload: 'حفظ جهة الاتصال',
+    saveContactNumber: 'رقم المستشفى: 01095715211',
+    downloadsTitle: 'تحميلات مفيدة للأهل',
+    downloadsIntro: 'حمّل الإرشادات المختصرة واحتفظ بها على الهاتف للرجوع السريع.',
+    downloadsCards: [
+      { title: 'Checklist قبل العملية', desc: 'خطوات تجهيز الطفل قبل يوم العملية' },
+      { title: 'إرشادات ما بعد العملية', desc: 'العناية بالجرح والمتابعة الدورية' },
+      { title: 'دليل التغذية بعد العملية', desc: 'كيف تُقدّم الرضاعة والأكل بشكل آمن' }
+    ],
+    mythsTitle: 'معلومات صحيحة vs معلومات منتشرة غلط',
+    mythWrongLabel: '❌ غلط:',
+    mythRightLabel: '✅ الصحيح:',
+    mythsCards: [
+      { wrong: 'الشفة الأرنبية معناها الطفل عنده مشكلة في الذكاء.', right: 'لا علاقة مباشرة بين الشفة الأرنبية ومستوى الذكاء.' },
+      { wrong: 'لو تأخرنا في المتابعة مش هتفرق.', right: 'المتابعة المبكرة تقلل المضاعفات وتحسن النتائج بشكل واضح.' },
+      { wrong: 'العملية الواحدة تكفي لكل المراحل.', right: 'العلاج غالبًا يكون على مراحل حسب عمر الطفل واحتياجه.' }
+    ]
   },
   en: {
     nav: ['Initiative', 'Team', 'Events', 'FAQ', 'Contact'],
@@ -75,7 +115,47 @@ window.siteTranslations = {
     notes_label: 'Required Service',
     notes_placeholder: 'اكتب تفاصيل الحالة أو الخدمة المطلوبة / Describe the case or required service',
     wa_submit: 'Send via WhatsApp',
-    social_h2: 'Follow us and join the awareness'
+    social_h2: 'Follow us and join the awareness',
+    journeyLabel: 'Choose your child age to know the current stage',
+    journeyCurrentPrefix: 'Current stage: ',
+    journeyNextPrefix: 'Next step: ',
+    journeyNextFinal: 'Periodic follow-up and final cosmetic evaluation as needed.',
+    ageOptions: ['Before Birth', 'Birth to 3 Months', '3 to 6 Months', '9 to 12 Months', 'From 1 to 5 Years', 'From 6 to 12 Years', 'Adolescence'],
+    mistakesTitle: 'Common Parent Mistakes After Surgery',
+    mistakesIntro: 'Avoiding these mistakes helps better healing, better outcomes, and fewer complications.',
+    mistakesCorrectLabel: '✅ Correct:',
+    mistakesCards: [
+      { badge: '❌ Feeding', title: 'Using an unsuitable feeding method', wrong: 'Some babies need a specific feeding position or bottle in the first period.', correct: 'Follow the medical team instructions for feeding type, amount, and timing.' },
+      { badge: '❌ Wound', title: 'Touching or cleaning the wound harshly', wrong: 'Rough cleaning or unapproved products may slow healing.', correct: 'Clean the area gently using only the recommended method and follow medications on time.' },
+      { badge: '❌ Follow-up', title: 'Delaying follow-up appointments', wrong: 'Delays may postpone detection of simple issues that are easier to treat early.', correct: 'Attend all scheduled visits even if your child seems fine.' },
+      { badge: '❌ Food', title: 'Giving solid food too early', wrong: 'Unsuitable food may put pressure on the wound or cause pain.', correct: 'Start nutrition progression only according to the doctor plan.' },
+      { badge: '❌ Home care', title: 'Ignoring hand hygiene before handling your child', wrong: 'Home infections are a common reason for wound inflammation.', correct: 'Wash hands well before feeding, changing dressing, or giving medicine.' },
+      { badge: '❌ Emergency', title: 'Waiting despite warning symptoms', wrong: 'Fever, continuous bleeding, or food refusal needs quick contact with the team.', correct: 'Contact the hospital immediately or via WhatsApp when any abnormal sign appears.' }
+    ],
+    urgentTitle: 'When Should I Contact the Medical Team Immediately?',
+    urgentNote: 'If any of the following signs appear after surgery, do not wait and contact the hospital or WhatsApp directly.',
+    urgentItems: ['Persistent or sudden high fever.', 'Bleeding that does not stop from the surgery area.', 'Refusal of feeding for a noticeable period.', 'Increased swelling or abnormal wound discharge.', 'Repeated vomiting or unusual severe lethargy.', 'Breathing difficulty or bluish lips.'],
+    urgentCta: 'Contact via WhatsApp Now',
+    saveContactTitle: 'Save the Hospital Number Quickly',
+    saveContactText: 'Save the number now for faster communication when needed.',
+    saveContactCall: 'Call Now',
+    saveContactDownload: 'Save Contact',
+    saveContactNumber: 'Hospital Number: 01095715211',
+    downloadsTitle: 'Helpful Downloads for Parents',
+    downloadsIntro: 'Download short guides and keep them on your phone for quick reference.',
+    downloadsCards: [
+      { title: 'Pre-op Checklist', desc: 'How to prepare your child before surgery day' },
+      { title: 'Post-op Care Guide', desc: 'Wound care and follow-up instructions' },
+      { title: 'Feeding Guide After Surgery', desc: 'How to provide feeding safely' }
+    ],
+    mythsTitle: 'Correct Facts vs Common Myths',
+    mythWrongLabel: '❌ Myth:',
+    mythRightLabel: '✅ Fact:',
+    mythsCards: [
+      { wrong: 'Cleft lip means the child has low intelligence.', right: 'There is no direct relation between cleft lip and intelligence.' },
+      { wrong: 'Delaying follow-up does not matter.', right: 'Early follow-up reduces complications and improves outcomes.' },
+      { wrong: 'One surgery is enough for all stages.', right: 'Treatment is usually staged based on age and need.' }
+    ]
   },
   phraseMap: {
     'ابتسامة جديدة': 'A New Smile',
