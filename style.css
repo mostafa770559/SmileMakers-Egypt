@@ -2190,6 +2190,7 @@ body.dark .whatsapp-btn {
 }
 
 .treatment-timeline {
+  display: none;
   overflow: hidden;
   background: #f4f9fd;
   padding: 80px 20px;
